@@ -1,13 +1,13 @@
 import { TOGGLE_SIDEBAR } from '../actions/sidebar';
 
-export default function sidebarReducer(state, action) {
-    console.log(action)
+export default function sidebarReducer(state, payload) {
+    console.log(payload)
     console.log(state)
-    switch (action.type) {
+    switch (payload.type) {
         case TOGGLE_SIDEBAR:
             return {
                 ...state,
-                visible: action.visible
+                visible: !state.visible
             }
         default:
             return state;

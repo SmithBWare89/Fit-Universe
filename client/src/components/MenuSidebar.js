@@ -10,8 +10,13 @@ import {
   Segment,
   Sidebar,
 } from 'semantic-ui-react';
+import { TOGGLE_SIDEBAR } from '../utils/actions/sidebar';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function MenuSidebar({visible}) {
+    console.log(visible)
+    const dispatch = useDispatch();
+    const state = useSelector(state => state);
     return (
         <Grid
             columns={1}
@@ -19,11 +24,11 @@ export default function MenuSidebar({visible}) {
             <Grid.Column>
                 <Sidebar.Pushable
                     as={Menu}
-                    animation='overlay'
-                    direction='left'
+                    animation='slide out'
                     icon='labeled'
-                    // dimmed={true}
+                    dimmed={true}
                     visible={visible}
+                    onHide={() => dispatch({type: TOGGLE_SIDEBAR})}
                     inverted
                     vertical
                     width='thin'

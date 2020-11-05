@@ -29,6 +29,7 @@ function App() {
   return (
     <Router>
         <Provider store={store}>
+          <MenuSidebar />
           <Grid>
             <Grid.Column width={16} style={{backgroundColor: 'yellow'}}>
                 <h1>Nav Bar</h1>
