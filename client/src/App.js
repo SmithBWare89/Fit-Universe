@@ -10,20 +10,21 @@ import Signup from "./pages/Signup";
 import NoMatch from "./pages/NoMatch";
 
 //Components
+import Header from "../src/components/Header";
 
-import Nav from "./components/Nav";
 
 function App() {
   return (
     <Router>
       <div>
+      
+
         <Switch>
-          <Nav />
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
 
-          <Route component={NoMatch} />
+          <Route component={NoMatch} /> */}
         </Switch>
       </div>
     </Router>
