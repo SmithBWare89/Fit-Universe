@@ -1,22 +1,11 @@
-import React, { useEffect } from 'react';
-import { TOGGLE_SIDEBAR } from '../utils/actions/sidebar';
-import { useDispatch } from 'react-redux';
-import { Button } from 'semantic-ui-react'
+import React from 'react';
 
 const Home = () => {
-  const dispatch = useDispatch();
-  function toggleSidebar(e) {
-    e.preventDefault();
-    dispatch({type: TOGGLE_SIDEBAR})
-  }
-
   return (
     <div className="container">
-      <Button
-        onClick={toggleSidebar}
-      >
-        Splash Page
-      </Button>
+      <a
+        href='#'
+      >Splash Page</a>
     </div>
   );
 };
