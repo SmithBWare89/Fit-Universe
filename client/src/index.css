@@ -4,3 +4,21 @@
     --munsell: #508CA4;
     --white: #ffffff;
 }
+
+/* Sidebar Menu Styling Start */
+.menuSidebar {
+    background-color: var(--munsell) !important;
+    font-size: 1.5rem !important;
+    color: var(--white);
+}
+
+.menu-item {
+    font-size: 2.0rem;
+}
+
+.menu-icon {
+    margin-right: 5px !important;
+}
+
+.item:hover {
+    background-color: var(--pewter) !important;

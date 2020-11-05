@@ -23,7 +23,9 @@ import sidebarReducer from './utils/reducers/sidebar';
 function App() {
   // Redux Store
   const store = createStore(sidebarReducer, {
-    visible: false
+    sidebarMenu: {
+      visible: false
+    }
   })
 
   return (
