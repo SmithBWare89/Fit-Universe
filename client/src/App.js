@@ -31,10 +31,9 @@ function App() {
     <Router>
         <Provider store={store}>
           <Grid>
-            <Grid.Row style={{backgroundColor: 'yellow'}}>
+            <Grid.Column width={16} style={{backgroundColor: 'yellow'}}>
                 <h1>Nav Bar</h1>
-            </Grid.Row>
-            {/* <Grid.Row columns={2}> */}
+            </Grid.Column>
               <Grid.Column width={14} style={{backgroundColor: 'red', height: '100%'}}>
                 <Switch>
                   <Route exact path="/" component={Home} />
@@ -47,7 +46,6 @@ function App() {
               <Grid.Column width={2} style={{backgroundColor: 'blue'}}>
                 <h1>Side Menu!</h1>
               </Grid.Column>
-            {/* </Grid.Row> */}
           </Grid>
         </Provider>
     </Router>
