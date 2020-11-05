@@ -1,10 +1,21 @@
-import React from "react";
-
+import React, { useEffect } from 'react';
+import { TOGGLE_SIDEBAR } from '../utils/actions/sidebar';
+import { useDispatch } from 'react-redux';
+import { Button } from 'semantic-ui-react'
 
 const Home = () => {
+  const dispatch = useDispatch();
+
   return (
     <div className="container">
-      <h1>Splash Page</h1>
+      <a
+        onClick={() => dispatch({
+          type: TOGGLE_SIDEBAR,
+          payload: {
+            action: true
+          }
+        })}
+      >Splash Page</a>
     </div>
   );
 };
