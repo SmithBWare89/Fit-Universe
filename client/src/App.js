@@ -23,12 +23,15 @@ import sidebarReducer from './utils/reducers/sidebar';
 function App() {
   // Redux Store
   const store = createStore(sidebarReducer, {
-    visible: false
+    sidebarMenu: {
+      visible: false
+    }
   })
 
   return (
     <Router>
         <Provider store={store}>
+          <MenuSidebar />
           <Grid>
             <Grid.Column width={16} style={{backgroundColor: 'yellow'}}>
                 <h1>Nav Bar</h1>

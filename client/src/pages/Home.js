@@ -5,17 +5,18 @@ import { Button } from 'semantic-ui-react'
 
 const Home = () => {
   const dispatch = useDispatch();
+  function toggleSidebar(e) {
+    e.preventDefault();
+    dispatch({type: TOGGLE_SIDEBAR})
+  }
 
   return (
     <div className="container">
-      <a
-        onClick={() => dispatch({
-          type: TOGGLE_SIDEBAR,
-          payload: {
-            action: true
-          }
-        })}
-      >Splash Page</a>
+      <Button
+        onClick={toggleSidebar}
+      >
+        Splash Page
+      </Button>
     </div>
   );
 };
