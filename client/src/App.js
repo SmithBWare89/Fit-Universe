@@ -5,7 +5,6 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import './App.css';
 
 // Pages
 import Home from "./pages/Home";
