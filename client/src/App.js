@@ -1,6 +1,6 @@
 
 import React from "react";
-import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route,Switch } from 'react-router-dom';
 import './App.css';
 
 // Pages
@@ -24,7 +24,7 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
 
-          <Route component={NoMatch} /> */}
+          <Route component={NoMatch} />
         </Switch>
       </div>
     </Router>
