@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NoMatch from "./pages/NoMatch";
+import Workout from './pages/Workout';
 
 //Components
 import Header from "../src/components/Header";
@@ -38,6 +39,7 @@ function App() {
                   <Route exact path="/" component={Home} />                  
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/signup" component={Signup} />
+                  <Route exact path="/workouts" component={Workout} />
                   <Route component={NoMatch} />
                 </Switch>
               </Grid.Column>
