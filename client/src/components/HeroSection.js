@@ -1,15 +1,20 @@
 import React from 'react'
 import "../index.css";
-import video from "../components/videos/yoga.mp4";
+import yoga from "./videos/yoga.mp4";
+
+
+
 
 function HeroSection() {
     return (
       <div className="hero-container">
-        <video src={video} autoPlay loop muted />
+        <video src={yoga} autoPlay loop muted type="video/mp4" />
         <h1>FIT UNIVERSE</h1>
         <p></p>
         <div className="hero-btns">
-          <button class="ui black basic button">GET STARTED</button>
+          <button className="ui inverted secondary basic button" >
+            GET STARTED
+          </button>
         </div>
       </div>
     );
