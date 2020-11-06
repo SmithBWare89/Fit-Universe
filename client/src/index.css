@@ -5,11 +5,29 @@
     --white: #ffffff;
 }
 
+/* NavBar Styling Start */
+.ui.secondary.menu {
+    background-color: var(--beau) !important;
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+    text-align: center;
+}
+
+.ui[class*="one column"].grid>.column:not(.row) {
+    padding: none !important;
+}
+
+.ui.secondary.menu .item:hover {
+    background-color: var(--pewter) !important;
+}
+/* NavBar Styling End */
+
 /* Sidebar Menu Styling Start */
 .menuSidebar {
-    background-color: var(--munsell) !important;
+    background-color: var(--pewter) !important;
     font-size: 1.5rem !important;
-    color: var(--white);
+    color: var(--munsell) !important
+;
 }
 
 .menu-item {
@@ -21,6 +39,6 @@
 }
 
 .item:hover {
-    background-color: var(--pewter) !important;
+    background-color: var(--beau) !important;
 }
 /* Sidebar Menu Styling End */
