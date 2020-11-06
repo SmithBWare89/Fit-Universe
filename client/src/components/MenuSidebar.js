@@ -39,22 +39,16 @@ export default function MenuSidebar() {
                              Profile
                         </span>
                     </Menu.Item>
-                    <Menu.Item as='a' onClick={() => dispatch({type: TOGGLE_SIDEBAR})}>
+                    {/* <Menu.Item as='a' onClick={() => dispatch({type: TOGGLE_SIDEBAR})}>
                         <span class="menu-item">
                             <i class="fas menu-icon fa-pager" />
                              Coaching
                         </span>
-                    </Menu.Item>
+                    </Menu.Item> */}
                     <Menu.Item as='a' onClick={() => dispatch({type: TOGGLE_SIDEBAR})}>
                         <span class="menu-item">
                             <i class="fas menu-icon fa-cog" />
                              Settings
-                        </span>
-                    </Menu.Item>
-                    <Menu.Item as='a' onClick={() => dispatch({type: TOGGLE_SIDEBAR})}>
-                        <span class="menu-item">
-                            <i class="fas menu-icon fa-sign-out-alt" />
-                             Logout
                         </span>
                     </Menu.Item>
                 </Sidebar>
