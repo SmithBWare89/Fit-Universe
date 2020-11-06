@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const commentSchema = require('./commentsSchema');
 
 const strengthSchema = new Schema ({
+    strengthWorkoutId: {
+        type: Schema.Types.ObjectId,
+        default: () => new Types.ObjectId()
+    },
     movementName: {
         type: String,
         required: true,
@@ -20,7 +25,8 @@ const strengthSchema = new Schema ({
         type: Number,
         required: true,
         trim: true
-    }
+    },
+    comments: [commentSchema]
 });
 
 module.exports = strengthSchema;
