@@ -53,13 +53,13 @@ const LoginForm = props => {
     return (
       <div className="login-container">
         <video src={run} autoPlay loop muted type="video/mp4" />
-        <Grid 
-        className="login"
+        <Grid
+          className="login"
           textAlign="center"
           style={{ height: "100vh" }}
           verticalAlign="middle"
         >
-          <Grid.Column style={{ maxWidth: 450 }} >
+          <Grid.Column style={{ maxWidth: 450 }}>
             <Header as="h2" style={{ Color: "#508CA4" }} textAlign="center">
               Log-in to your account
             </Header>
@@ -95,6 +95,7 @@ const LoginForm = props => {
                   fluid
                   size="large"
                   to="/"
+                  type="submit"
                 >
                   Login
                 </Button>
