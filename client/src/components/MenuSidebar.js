@@ -34,8 +34,8 @@ export default function MenuSidebar() {
                     className="menuSidebar"
                 >
                     <Menu.Item as='a' onClick={() => dispatch({type: TOGGLE_SIDEBAR})}>
-                        <span class="menu-item">
-                            <i class="fas menu-icon fa-user" />
+                        <span className="menu-item">
+                            <i className="fas menu-icon fa-user" />
                              Profile
                         </span>
                     </Menu.Item>
@@ -46,8 +46,8 @@ export default function MenuSidebar() {
                         </span>
                     </Menu.Item> */}
                     <Menu.Item as='a' onClick={() => dispatch({type: TOGGLE_SIDEBAR})}>
-                        <span class="menu-item">
-                            <i class="fas menu-icon fa-cog" />
+                        <span className="menu-item">
+                            <i className="fas menu-icon fa-cog" />
                              Settings
                         </span>
                     </Menu.Item>

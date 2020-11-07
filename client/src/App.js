@@ -21,7 +21,22 @@ import { state } from './utils/GlobalState';
 
 // Actions and Reducers
 import sidebarReducer from './utils/reducers/sidebar';
+   
 
+
+const client = new ApolloClient({
+  request: (operation) => {
+    console.log(operation);
+    const token = localStorage.getItem("id_token");
+
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : "",
+      },
+    });
+  },
+  uri: "http://localhost:3000/graphql",
+});
 
 function App() {
   // Redux Store
@@ -29,11 +44,19 @@ function App() {
 
   return (
     <Router>
+      <ApolloProvider client={client}>
         <Provider store={store}>
+<<<<<<< HEAD
           <MenuSidebar />
           <Navigation className="navigation"/>
           <Grid>
               <Grid.Column width={14}>
+=======
+          {/* <MenuSidebar />
+          <Navigation className="navigation"/> */}
+          <Grid>
+              <Grid.Column width={16}>
+>>>>>>> feature/signup-login
                 <Switch>
                   <Route exact path="/" component={Home} />                  
                   <Route exact path="/login" component={Login} />
@@ -41,11 +64,16 @@ function App() {
                   <Route component={NoMatch} />
                 </Switch>
               </Grid.Column>
+<<<<<<< HEAD
               <Grid.Column width={2}>
+=======
+              {/* <Grid.Column width={2}>
+>>>>>>> feature/signup-login
                 <h1>Side Menu!</h1>
-              </Grid.Column>
+              </Grid.Column> */}
           </Grid>
         </Provider>
+      </ApolloProvider>
     </Router>
   );
 }

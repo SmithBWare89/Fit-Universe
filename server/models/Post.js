@@ -32,6 +32,7 @@ const commentSchema = new Schema(
         }
     }
 );
+const commentSchema = require('./schemas/commentsSchema');
 
 const postSchema = new Schema(
     {
