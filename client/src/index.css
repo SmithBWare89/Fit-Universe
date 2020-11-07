@@ -99,12 +99,6 @@ video {
 
 
 
-
-
-
-
-
-
 @media screen and (max-width: 960px) {
   .hero-container > h1 {
     font-size: 70px;
@@ -135,3 +129,40 @@ video {
 
 
 
+/* NavBar Styling Start */
+.ui.secondary.menu {
+    background-color: var(--beau) !important;
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+    text-align: center;
+}
+
+.ui[class*="one column"].grid>.column:not(.row) {
+    padding: none !important;
+}
+
+.ui.secondary.menu .item:hover {
+    background-color: var(--pewter) !important;
+}
+/* NavBar Styling End */
+
+/* Sidebar Menu Styling Start */
+.menuSidebar {
+    background-color: var(--pewter) !important;
+    font-size: 1.5rem !important;
+    color: var(--munsell) !important
+;
+}
+
+.menu-item {
+    font-size: 2.0rem;
+}
+
+.menu-icon {
+    margin-right: 5px !important;
+}
+
+.item:hover {
+    background-color: var(--beau) !important;
+}
+/* Sidebar Menu Styling End */

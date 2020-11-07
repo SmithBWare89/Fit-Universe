@@ -34,9 +34,11 @@ const LoginForm = props => {
     event.preventDefault();
 
     try {
+      console.log("will run mutation");
       const { data } = await login({
         variables: { ...formState }
       });
+      console.log(data);
 
       Auth.login(data.login.token);
     } catch (e) {
@@ -51,6 +53,7 @@ const LoginForm = props => {
     });
   };
     return (
+
       <div className="login-container">
         <video src={run} autoPlay loop muted type="video/mp4" />
         <Grid
@@ -94,8 +97,7 @@ const LoginForm = props => {
                   style={{ backgroundColor: "#508CA4" }}
                   fluid
                   size="large"
-                  to="/"
-                  type="submit"
+                  type="submit"    
                 >
                   Login
                 </Button>
