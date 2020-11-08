@@ -1,0 +1,4 @@
+// MOVEMENTS
+export const DECLINE_BENCH = "DECLINE_BENCH";
+export const FLAT_BENCH =  "FLAT_BENCH";
+export const INCLINE_BENCH = "INCLINE_BENCH";

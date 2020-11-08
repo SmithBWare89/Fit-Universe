@@ -4,7 +4,7 @@ import { Grid, Container } from 'semantic-ui-react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
 // Pages
 import Home from "./pages/Home";
@@ -18,15 +18,18 @@ import Header from "../src/components/Header";
 import MenuSidebar from '../src/components/MenuSidebar';
 import Navigation from './components/Navigation';
 
-import { state } from './utils/GlobalState';
-
 // Actions and Reducers
 import sidebarReducer from './utils/reducers/sidebar';
+import strengthWorkoutReducer from './utils/reducers/strenghtWorkout';
 
+const rootReducer = combineReducers({
+  sidebarReducer,
+  strengthWorkoutReducer
+})
 
 function App() {
   // Redux Store
-  const store = createStore(sidebarReducer, state)
+  const store = createStore(rootReducer)
 
   return (
     <Router>

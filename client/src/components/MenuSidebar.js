@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export default function MenuSidebar() {
     const dispatch = useDispatch();
-    const state = useSelector(state => state);
+    const state = useSelector(state => state.sidebarReducer);
     const { sidebarMenu } = state
     
     return (

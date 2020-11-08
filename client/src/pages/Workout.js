@@ -4,6 +4,8 @@ import {
     Form,
     Select
 } from 'semantic-ui-react';
+import { useSelector } from 'react-redux'
+import StrengthLog from '../components/Strength'
 
 export default function Workout() {
     const [ workoutType, setWorkoutType ] = useState();
@@ -19,8 +21,6 @@ export default function Workout() {
         } else if(e.target.id === 'Cardio') {
             setWorkoutType('Cardio')
         }
-
-        console.log(workoutType)
     }
 
     return (
@@ -37,7 +37,7 @@ export default function Workout() {
             </Form>
             {
                 workoutType === 'Strength'
-                    ? (<h1>Strength!</h1>)
+                    ? (<StrengthLog />)
                     : workoutType === 'Cardio'
                         ? (<h1>Cardio!</h1>)
                         : (<h1>Select A Workout Type!</h1>)
