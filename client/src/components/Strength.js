@@ -1,28 +1,21 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {
     Form,
-    Select,
     Button,
     Container,
-    Label
 } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ADD_MOVEMENT, DECLINE_BENCH, FLAT_BENCH, INCLINE_BENCH } from '../utils/actions/strengthWorkout';
-import FlatBenchPress from './Movements/FlatBenchPress';
 import SelectMovements from './SelectMovements';
 
 export default function StrengthLog() {
-    const [workoutState, setWorkoutState] = useState([]);
-
     const {
         Group,
-        Field,
         Input,
-        Checkbox,
         Select
     } = Form;
     const dispatch = useDispatch();
     const state = useSelector(state => state.strengthWorkoutReducer);
+    console.log(state)
 
     const repOptions = [
         { key: 1, text: 1, value: 1},
@@ -47,39 +40,41 @@ export default function StrengthLog() {
         { key: 20, text: 20, value: 20},
     ]
 
-    // function handleError(e) {
-    //     const inputValue = e.target.value;
-    //     if (isNaN(inputValue)) {
-    //         return {
-    //             content: 'Please enter a valid weight!',
-    //             pointing: 'below'
-    //         }
-    //     }
-    // }
+    function handleDeletion(evt) {
+        evt.preventDefault();
+        const formElement = evt.target.closest('form');
+        const className = evt.target.classList[2];
+        console.log(Object.entries(state))
+        const filteredMovement = Object.entries(state).filter(movement => movement[0] === className)
+        console.log(filteredMovement)
+    }
 
-    function workoutFormatter(liftName, liftVarName) {
+    function workoutFormatter(movement) {
+        const liftVarName = movement[0]
+        const liftName = movement[1].name
         return (
             <>
             <Form className={liftVarName}>
                 <h1>{liftName}</h1>
                 <Group widths='equal' className={`${liftVarName}-1`}>
                     <Select fluid label='Reps' placeholder='Select Reps' options={repOptions} />
-                    <Input fluid placeholder='Enter Weight' label='Weight' required />
+                    <Input fluid placeholder='Enter Weight' label='Weight' />
                     <Button>+</Button>
                     <Button>x</Button>
                 </Group>
                 <Group widths='equal' className={`${liftVarName}-2`}>
                     <Select fluid label='Reps' placeholder='Select Reps' options={repOptions} />
-                    <Input fluid placeholder='Enter Weight' label='Weight' required />
+                    <Input fluid placeholder='Enter Weight' label='Weight' />
                     <Button>+</Button>
                     <Button>x</Button>
                 </Group>
                 <Group widths='equal' className={`${liftVarName}-3`}>
                     <Select fluid label='Reps' placeholder='Select Reps' options={repOptions} />
-                    <Input fluid placeholder='Enter Weight' label='Weight' required />
+                    <Input fluid placeholder='Enter Weight' label='Weight' />
                     <Button>+</Button>
                     <Button>x</Button>
                 </Group>
+                <Button onClick={handleDeletion} className={liftVarName}>Remove Movement</Button>
             </Form>
             </>
         )
@@ -91,10 +86,8 @@ export default function StrengthLog() {
             {
                 Object.entries(state).map(item => {
                     const checked = item[1].triggered
-                    const liftVarName = item[0];
-                    const liftName = item[1].name
                     if (checked) {
-                        return workoutFormatter(liftName, liftVarName)
+                        return workoutFormatter(item)
                     }
                     return;
                 })

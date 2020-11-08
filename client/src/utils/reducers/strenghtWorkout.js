@@ -1,4 +1,3 @@
-import { Form } from 'semantic-ui-react';
 import {
     FLAT_BENCH,
     DECLINE_BENCH,
@@ -8,18 +7,18 @@ import {
 export default function strengthWorkoutReducer(state ={
     flatBench: {
         triggered: false,
+        reducer: 'FLAT_BENCH',
         name: 'Flat Bench Press',
-        reducer: FLAT_BENCH
     },
     declineBench: {
         triggered: false,
+        reducer: 'DECLINE_BENCH',
         name: 'Decline Bench Press',
-        reducer: DECLINE_BENCH
     },
     inclineBench: {
         triggered: false,
+        reducer: 'INCLINE_BENCH',
         name: 'Incline Bench Press',
-        reducer: INCLINE_BENCH
     }
 }, payload) {
     switch(payload.type) {
