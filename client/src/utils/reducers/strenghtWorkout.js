@@ -1,24 +1,29 @@
 import {
     FLAT_BENCH,
     DECLINE_BENCH,
-    INCLINE_BENCH
+    INCLINE_BENCH,
+    ADD_FLAT_BENCH_SET
 } from '../actions/strengthWorkout';
 
 export default function strengthWorkoutReducer(state ={
     flatBench: {
         triggered: false,
-        reducer: 'FLAT_BENCH',
+        reducer: FLAT_BENCH,
+        addSet: ADD_FLAT_BENCH_SET,
         name: 'Flat Bench Press',
+        sets: 5
     },
     declineBench: {
         triggered: false,
-        reducer: 'DECLINE_BENCH',
+        reducer: DECLINE_BENCH,
         name: 'Decline Bench Press',
+        sets: 3
     },
     inclineBench: {
         triggered: false,
-        reducer: 'INCLINE_BENCH',
+        reducer: INCLINE_BENCH,
         name: 'Incline Bench Press',
+        sets: 3
     }
 }, payload) {
     switch(payload.type) {
@@ -26,24 +31,40 @@ export default function strengthWorkoutReducer(state ={
             return {
                 ...state,
                 flatBench: {
-                    name: 'Flat Bench Press',
+                    name: state.flatBench.name,
                     triggered: !state.flatBench.triggered,
+                    reducer: state.flatBench.reducer,
+                    sets: state.flatBench.sets
+                }
+            }
+        case ADD_FLAT_BENCH_SET:
+            return {
+                ...state,
+                flatBench: {
+                    name: state.flatBench.name,
+                    triggered: state.flatBench.triggered,
+                    reducer: state.flatBench.reducer,
+                    sets: state.flatBench.sets++
                 }
             }
         case INCLINE_BENCH:
             return {
                 ...state,
                 inclineBench: {
-                    name: 'Incline Bench Press',
+                    name: state.inclineBench.name,
                     triggered: !state.inclineBench.triggered,
+                    reducer: state.inclineBench.reducer,
+                    sets: state.inclineBench.sets
                 }
             }
         case DECLINE_BENCH:
             return {
                 ...state,
                 declineBench: {
-                    name: 'Decline Bench Press',
+                    name: state.declineBench.name,
                     triggered: !state.declineBench.triggered,
+                    reducer: state.declineBench.reducer,
+                    sets: state.declineBench.sets
                 }
             }
         default:

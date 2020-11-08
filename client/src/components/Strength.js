@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     Form,
     Button,
@@ -6,6 +6,7 @@ import {
 } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import SelectMovements from './SelectMovements';
+
 
 export default function StrengthLog() {
     const {
@@ -15,7 +16,6 @@ export default function StrengthLog() {
     } = Form;
     const dispatch = useDispatch();
     const state = useSelector(state => state.strengthWorkoutReducer);
-    console.log(state)
 
     const repOptions = [
         { key: 1, text: 1, value: 1},
@@ -40,48 +40,56 @@ export default function StrengthLog() {
         { key: 20, text: 20, value: 20},
     ]
 
-    function handleDeletion(evt) {
-        evt.preventDefault();
-        const formElement = evt.target.closest('form');
-        const className = evt.target.classList[2];
-        console.log(Object.entries(state))
-        const filteredMovement = Object.entries(state).filter(movement => movement[0] === className)
-        console.log(filteredMovement)
+
+    function setsCreator(sets, liftVarName, reducer){
+        for (let i = 0; i <= sets; i++){
+            <Group widths='equal' className={`${liftVarName}-${i}`} key={`${liftVarName}-${i}`}>
+                <Select fluid label='Reps' placeholder='Select Reps' options={repOptions} />
+                <Input fluid placeholder='Enter Weight' label='Weight' />
+                <Button className="addSet" onClick={dispatch({type: `${reducer}`})}>+</Button>
+                <Button>x</Button>
+            </Group>
+        }
+        return;
     }
 
     function workoutFormatter(movement) {
         const liftVarName = movement[0]
         const liftName = movement[1].name
+        const reducer = movement[1].addSet
         return (
             <>
-            <Form className={liftVarName}>
+            <Form className={liftVarName} key={liftVarName} id={liftVarName}>
                 <h1>{liftName}</h1>
-                <Group widths='equal' className={`${liftVarName}-1`}>
-                    <Select fluid label='Reps' placeholder='Select Reps' options={repOptions} />
-                    <Input fluid placeholder='Enter Weight' label='Weight' />
-                    <Button>+</Button>
-                    <Button>x</Button>
-                </Group>
-                <Group widths='equal' className={`${liftVarName}-2`}>
-                    <Select fluid label='Reps' placeholder='Select Reps' options={repOptions} />
-                    <Input fluid placeholder='Enter Weight' label='Weight' />
-                    <Button>+</Button>
-                    <Button>x</Button>
-                </Group>
-                <Group widths='equal' className={`${liftVarName}-3`}>
-                    <Select fluid label='Reps' placeholder='Select Reps' options={repOptions} />
-                    <Input fluid placeholder='Enter Weight' label='Weight' />
-                    <Button>+</Button>
-                    <Button>x</Button>
-                </Group>
-                <Button onClick={handleDeletion} className={liftVarName}>Remove Movement</Button>
+                {
+                    Object.entries(state).map(movement => {
+                        const sets = movement[1].sets;
+                        const setsArray = new Array(sets)
+                        setsArray.map((item, i) => {
+                            return <Group widths='equal' className={`${liftVarName}-${i}`} key={`${liftVarName}-${i}`}>
+                                <Select fluid label='Reps' placeholder='Select Reps' options={repOptions} />
+                                <Input fluid placeholder='Enter Weight' label='Weight' />
+                                <Button className="addSet" onClick={dispatch({ type: `${reducer}` })}>+</Button>
+                                <Button>x</Button>
+                            </Group>
+                        })
+                        return;
+                    })
+                }
+                    <Group widths='equal' className={`${liftVarName}`} key={`${liftVarName}`}>
+                        <Select fluid label='Reps' placeholder='Select Reps' options={repOptions} />
+                        <Input fluid placeholder='Enter Weight' label='Weight' />
+                        <Button className="addSet" onClick={dispatch({ type: `${reducer}` })}>+</Button>
+                        <Button>x</Button>
+                    </Group>
             </Form>
+                <Button className={liftVarName}>Remove Movement</Button>
             </>
         )
     }
     
     return (
-        <Container>
+        <Container id="strengthContainer">
             <SelectMovements />
             {
                 Object.entries(state).map(item => {
