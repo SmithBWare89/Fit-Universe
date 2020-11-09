@@ -63,36 +63,27 @@ export default function StrengthForm({props}) {
                     <Segment.Inline>
                         <Button className="addSet" onClick={() => dispatch({type: `${props[1].addSet}`})}>+</Button>
                         {
-                            numberSets > 0
+                            numberSets >= 1
                                 ? (
                                     <Button className="deleteSet" onClick={(e) => {
                                         /* 
                                             The two const declarations will find the last div of rep/weight fields then grabs their name
                                         */
-                                        const weightField = Array.from(document.querySelectorAll(`.${liftVarName}-rep`)).pop().lastChild.getAttribute('name');
+                                        const weightField = Array.from(document.querySelectorAll(`.${liftVarName}-weight`)).pop().lastChild.firstChild.getAttribute('name');
                                         const repField = Array.from(document.querySelectorAll(`.${liftVarName}-rep`)).pop().lastChild.getAttribute('name');
-
                                         // Then we can also remove the property from the workout state as well
-                                        delete workoutState[`${weightField}`];
-                                        delete workoutState[`${repField}`];
+
 
                                         setWorkOutState(
-                                            ...workoutState,
-                                            
+                                            delete workoutState[weightField],
+                                            delete workoutState[repField]
                                         )
-
-                                        console.log(workoutState)
                                         dispatch({type: `${props[1].deleteSet}`})
                                     }}>x</Button>
                                 )
                                 : (
-                                    <Button className="deleteSet" onClick={(e) => {
-                                        const weightField = Array.from(document.querySelectorAll(`.${liftVarName}-rep`)).pop().lastChild.getAttribute('name');
-                                        const repField = Array.from(document.querySelectorAll(`.${liftVarName}-rep`)).pop().lastChild.getAttribute('name');
-                                        console.log(weightField)
-                                        console.log(repField)
-                                        
-                                        // dispatch({type: `${props[1].reducer}`})
+                                    <Button className="deleteSet" onClick={(e) => {                                    
+                                        dispatch({type: `${props[1].reducer}`})
                                     }}>x</Button>
                                 )
                         }
@@ -117,21 +108,42 @@ export default function StrengthForm({props}) {
                             
                             return <>
                             <Group widths='equal'>
-                            <Select 
-                                fluid 
-                                label='Reps' 
-                                placeholder='Select Reps' 
-                                options={repOptions} 
-                                name={repName}
-                                className={`${liftVarName}-rep`}
-                            />
-                            <Input 
-                                fluid 
-                                placeholder='Enter Weight' 
-                                label='Weight' 
-                                name={`${liftVarName}-weight`}
-                                class
-                            />
+                                <Select 
+                                    fluid 
+                                    label='Reps' 
+                                    placeholder='Select Reps' 
+                                    options={repOptions} 
+                                    name={repName}
+                                    value={workoutState[repName]}
+                                    className={`${liftVarName}-rep`}
+                                    key={`${repName}-key`}
+                                    onChange={(e) => {
+                                        setWorkOutState(
+                                            {
+                                                ...workoutState,
+                                                [repName]: e.target.firstChild.textContent
+                                            }
+                                        )
+                                    }}
+                                />
+                                <Input 
+                                    fluid 
+                                    placeholder='Enter Weight' 
+                                    label='Weight' 
+                                    name={weightName}
+                                    value={workoutState[weightName]}
+                                    className={`${liftVarName}-weight`}
+                                    key={`${weightName}-key`}
+                                    onChange={(e) => {
+                                        setWorkOutState(
+                                            {
+                                                ...workoutState,
+                                                [weightName]: e.target.value
+                                            }
+                                        )
+                                        console.log(workoutState[weightName])
+                                    }}
+                                />
                             </Group>
                             </>
                         })

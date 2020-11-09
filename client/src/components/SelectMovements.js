@@ -24,18 +24,20 @@ export default function SelectMovements() {
             trigger={<Button>Select Your Movements</Button>}
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
+            key='select-modal'
         >
             <Header>Select Your Movements</Header>
-            <Modal.Content>
-                <Group grouped>
+            <Modal.Content key='select-modal-content'>
+                <Group grouped key='select-modal-group'>
                     {
-                        Object.entries(state).map(movement => {
+                        Object.entries(state).map((movement, index) => {
                             return <>
                                 <Field 
                                     label={movement[1].name}
                                     name={movement[1].name}
                                     type='checkbox'
                                     control='input'
+                                    key={`${movement[0]}-selection-${index}`}
                                     onClick={() => dispatch({type: `${movement[1].reducer}`})}
                                 />
                             </>
@@ -43,11 +45,8 @@ export default function SelectMovements() {
                     }
                 </Group>
             </Modal.Content>
-            <Modal.Actions>
-                <Button color='red' onClick={() => setOpen(false)}>
-                    Cancel
-                </Button>
-                <Button color='green' onClick={() => setOpen(false)}>
+            <Modal.Actions key='select-modal-actions'>
+                <Button color='green' onClick={() => setOpen(!open)} key='modal-select-done'>
                     Done
                 </Button>
             </Modal.Actions>
