@@ -6,6 +6,7 @@ import {
 } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import SelectMovements from './SelectMovements';
+import StrengthForm from './StrengthForm';
 
 export default function StrengthLog() {
     const {
@@ -14,7 +15,8 @@ export default function StrengthLog() {
         Select
     } = Form;
     const dispatch = useDispatch();
-    const state = useSelector(state => state.strengthWorkoutReducer);
+    const state = useSelector(state => state.strengthMovementsReducer);
+    const movement = Object.entries(state).map(movement => movement);
 
     const repOptions = [
         { key: 1, text: 1, value: 1},
@@ -79,21 +81,20 @@ export default function StrengthLog() {
                     <Button className="deleteSet">x</Button>
                 </Group>
             </Form>
-        <Button id={`${liftVarName}Button`} onClick={() =>dispatch({type: `${reducer}`})}>Remove Movement</Button>
+            <Button id={`${liftVarName}Button`} onClick={() =>dispatch({type: `${reducer}`})}>Remove Movement</Button>
             </>
         )
     }
-
    
     return (
         <Container id="strengthContainer">
             <SelectMovements />
             <Form>
             {
-                Object.entries(state).map(movement => {
+                movement.map(movement => {
                     const checked = movement[1].triggered
-                    if (checked) {
-                        return workoutFormatter(movement);
+                    if (checked){
+                        return <StrengthForm props={movement}/>
                     }
                 })
             }

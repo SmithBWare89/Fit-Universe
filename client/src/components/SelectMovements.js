@@ -15,7 +15,7 @@ export default function SelectMovements() {
 
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch();
-    const state = useSelector(state => state.strengthWorkoutReducer);
+    const state = useSelector(state => state.strengthMovementsReducer);
 
     return (
         <Modal

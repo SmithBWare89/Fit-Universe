@@ -6,20 +6,20 @@ import {
     UPDATE_SET
 } from '../actions/strengthMovements';
 
-export default function strengthMovements(state ={
+export default function strengthMovementsReducer(state ={
     flatBench: {
         triggered: false,
         reducer: FLAT_BENCH,
         addSet: ADD_FLAT_BENCH_SET,
         name: 'Flat Bench Press',
-        sets: 3
-    },
+        sets: 4
+        },
     declineBench: {
         triggered: false,
         reducer: DECLINE_BENCH,
         name: 'Decline Bench Press',
         sets: 3
-    },
+        },
     inclineBench: {
         triggered: false,
         reducer: INCLINE_BENCH,

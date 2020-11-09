@@ -20,11 +20,11 @@ import Navigation from './components/Navigation';
 
 // Actions and Reducers
 import sidebarReducer from './utils/reducers/sidebar';
-import strengthMovements from './utils/reducers/strengthMovements';
+import strengthMovementsReducer from './utils/reducers/strengthMovements';
 
 const rootReducer = combineReducers({
   sidebarReducer,
-  strengthMovements
+  strengthMovementsReducer
 })
 
 function App() {
