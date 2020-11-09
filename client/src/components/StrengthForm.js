@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Form,
-    Button
+    Button,
+    Header,
+    Segment
 } from 'semantic-ui-react';
+import {useDispatch} from 'react-redux';
 
 export default function StrengthForm({props}) {
-    const setsArray = new Array(props[1].sets)
-    console.log(props)
-    console.log(props[0])
+    const [numberSets, setNumberSets] = useState(0);
+    const dispatch = useDispatch();
     const liftVarName = props[0];
     const liftName = props[1].name;
-
+    
     const {
         Group,
         Input,
@@ -40,21 +42,51 @@ export default function StrengthForm({props}) {
         { key: 20, text: 20, value: 20},
     ]
 
+    const setsArray = (() => {
+        const emptyArray = []
+        for(let i = 0; i < numberSets; i++) {
+            emptyArray.push(' ');
+        }
+        return emptyArray;
+    })();
+
+    useEffect(() => {
+        setNumberSets(props[1].sets);
+    }, [props, dispatch]);
+
     return (
         <div>
-            <h1>Hello!</h1>
-                {               
-                    props[1].triggered
-                    ?
-                        setsArray.map(item => {
-                            return <Group widths='equal'>
-                            <Select fluid label='Reps' placeholder='Select Reps' options={repOptions} name={`${liftVarName}-rep-1`}/>
+            <Header as='h1'>
+                {liftName}
+                <Header.Subheader>
+                    <Segment.Inline>
+                        <Button className="addSet" onClick={() => dispatch({type: `${props[1].addSet}`})}>+</Button>
+                        {
+                            numberSets > 0
+                                ? (
+                                    <Button className="deleteSet" onClick={() => dispatch({type: `${props[1].deleteSet}`})}>x</Button>
+                                )
+                                : (
+                                    <Button className="deleteSet" onClick={() => dispatch({type: `${props[1].reducer}`})}>x</Button>
+                                )
+                        }
+                    </Segment.Inline>
+                </Header.Subheader>
+            </Header>
+                {             
+                    numberSets
+                    ? (
+                        setsArray.map(() => {
+                            return <>
+                            <Group widths='equal'>
+                            <Select fluid label='Reps' placeholder='Select Reps' options={repOptions} name={`${liftVarName}-rep-${props[1].sets}`}/>
                             <Input fluid placeholder='Enter Weight' label='Weight' name={`${liftVarName}-weight-1`}/>
-                            <Button className="addSet">+</Button>
-                            <Button className="deleteSet">x</Button>
                             </Group>
+                            </>
                         })
-                    : console.log('Thing')
+                        
+                    )
+                    : ''
                  }
         </div>
     )
