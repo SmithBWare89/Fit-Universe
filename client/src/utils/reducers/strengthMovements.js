@@ -2,16 +2,17 @@ import {
     FLAT_BENCH,
     DECLINE_BENCH,
     INCLINE_BENCH,
-    ADD_FLAT_BENCH_SET
-} from '../actions/strengthWorkout';
+    ADD_FLAT_BENCH_SET,
+    UPDATE_SET
+} from '../actions/strengthMovements';
 
-export default function strengthWorkoutReducer(state ={
+export default function strengthMovements(state ={
     flatBench: {
         triggered: false,
         reducer: FLAT_BENCH,
         addSet: ADD_FLAT_BENCH_SET,
         name: 'Flat Bench Press',
-        sets: 5
+        sets: 3
     },
     declineBench: {
         triggered: false,
@@ -58,6 +59,16 @@ export default function strengthWorkoutReducer(state ={
                 }
             }
         case DECLINE_BENCH:
+            return {
+                ...state,
+                declineBench: {
+                    name: state.declineBench.name,
+                    triggered: !state.declineBench.triggered,
+                    reducer: state.declineBench.reducer,
+                    sets: state.declineBench.sets
+                }
+            }
+        case UPDATE_SET:
             return {
                 ...state,
                 declineBench: {
