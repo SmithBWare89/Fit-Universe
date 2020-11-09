@@ -9,6 +9,7 @@ import {useDispatch} from 'react-redux';
 
 export default function StrengthForm({props}) {
     const [numberSets, setNumberSets] = useState(0);
+    const [workoutState, setWorkOutState ] = useState({});
     const dispatch = useDispatch();
     const liftVarName = props[0];
     const liftName = props[1].name;
@@ -64,10 +65,35 @@ export default function StrengthForm({props}) {
                         {
                             numberSets > 0
                                 ? (
-                                    <Button className="deleteSet" onClick={() => dispatch({type: `${props[1].deleteSet}`})}>x</Button>
+                                    <Button className="deleteSet" onClick={(e) => {
+                                        /* 
+                                            The two const declarations will find the last div of rep/weight fields then grabs their name
+                                        */
+                                        const weightField = Array.from(document.querySelectorAll(`.${liftVarName}-rep`)).pop().lastChild.getAttribute('name');
+                                        const repField = Array.from(document.querySelectorAll(`.${liftVarName}-rep`)).pop().lastChild.getAttribute('name');
+
+                                        // Then we can also remove the property from the workout state as well
+                                        delete workoutState[`${weightField}`];
+                                        delete workoutState[`${repField}`];
+
+                                        setWorkOutState(
+                                            ...workoutState,
+                                            
+                                        )
+
+                                        console.log(workoutState)
+                                        dispatch({type: `${props[1].deleteSet}`})
+                                    }}>x</Button>
                                 )
                                 : (
-                                    <Button className="deleteSet" onClick={() => dispatch({type: `${props[1].reducer}`})}>x</Button>
+                                    <Button className="deleteSet" onClick={(e) => {
+                                        const weightField = Array.from(document.querySelectorAll(`.${liftVarName}-rep`)).pop().lastChild.getAttribute('name');
+                                        const repField = Array.from(document.querySelectorAll(`.${liftVarName}-rep`)).pop().lastChild.getAttribute('name');
+                                        console.log(weightField)
+                                        console.log(repField)
+                                        
+                                        // dispatch({type: `${props[1].reducer}`})
+                                    }}>x</Button>
                                 )
                         }
                     </Segment.Inline>
@@ -76,11 +102,36 @@ export default function StrengthForm({props}) {
                 {             
                     numberSets
                     ? (
-                        setsArray.map(() => {
+                        setsArray.map((item, index) => {
+                            const repName = `${liftVarName}-rep-${index}`;
+                            const weightName = `${liftVarName}-weight-${index}`
+                            if (!workoutState.hasOwnProperty(repName)) {
+                                setWorkOutState(
+                                    {
+                                        ...workoutState,
+                                        [repName]: '',
+                                        [weightName]: ''
+                                    }
+                                )
+                            }
+                            
                             return <>
                             <Group widths='equal'>
-                            <Select fluid label='Reps' placeholder='Select Reps' options={repOptions} name={`${liftVarName}-rep-${props[1].sets}`}/>
-                            <Input fluid placeholder='Enter Weight' label='Weight' name={`${liftVarName}-weight-1`}/>
+                            <Select 
+                                fluid 
+                                label='Reps' 
+                                placeholder='Select Reps' 
+                                options={repOptions} 
+                                name={repName}
+                                className={`${liftVarName}-rep`}
+                            />
+                            <Input 
+                                fluid 
+                                placeholder='Enter Weight' 
+                                label='Weight' 
+                                name={`${liftVarName}-weight`}
+                                class
+                            />
                             </Group>
                             </>
                         })
