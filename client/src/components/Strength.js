@@ -7,6 +7,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import StrengthForm from './StrengthForm';
 import {OPEN_MODAL} from '../utils/actions/errorModal';
+import ErrorModal from './ErrorModal'
 
 export default function StrengthLog() {
     const [ workoutState, setWorkOutState ] = useState({});
@@ -14,16 +15,19 @@ export default function StrengthLog() {
     const {
     } = Form;
     const state = useSelector(state => state.strengthMovementsReducer);
-    const errorModalState = useSelector(state => state.errorModalReducer)
+    const errorModalState = useSelector(state => state.errorModalReducer);
     const movement = Object.entries(state).map(movement => movement);
 
     function handleSubmit() {
         console.log(Object.keys(workoutState).length)
-        console.log(workoutState)
-        // if(workoutState.length = 0){
-        //     dispatch({type: OPEN_MODAL});
-        //     console.log(errorModalState)
-        // }
+        if(Object.keys(workoutState).length = 0){
+            dispatch(
+                {
+                    type: OPEN_MODAL,
+                    errorMessage: 'Please fill out all forms!'
+                }
+            )
+        }
     }
    
     return (
@@ -41,6 +45,11 @@ export default function StrengthLog() {
             }
             <Button content='submit' style={{marginTop: '10px'}}>Submit</Button>
             </Form>
+            {
+                errorModalState
+                    ? <ErrorModal />
+                    : ''
+            }
         </div>
     )
 }

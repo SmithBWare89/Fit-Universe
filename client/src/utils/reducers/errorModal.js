@@ -5,18 +5,22 @@ import {
 } from '../actions/errorModal';
 
 export default function errorModalReducer(state = {
-    open: false
+    open: false,
+    errorMessage: ''
 }, payload) {
     switch(payload.type) {
         case OPEN_MODAL:
+            console.log(payload)
             return {
                 ...state,
-                open: true
+                open: !state.open,
+                errorMessage: payload.errorMessage
             }
         case CLOSE_MODAL:
             return {
                 ...state,
-                open: false
+                open: !state.open,
+                errorMessage: ''
             }
         default:
             return state
