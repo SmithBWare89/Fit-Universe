@@ -1,23 +1,43 @@
-import React, { useEffect } from 'react';
-import { TOGGLE_SIDEBAR } from '../utils/actions/sidebar';
-import { useDispatch } from 'react-redux';
-import { Button } from 'semantic-ui-react'
+import React from 'react';
+import HeroSection from "../components/HeroSection";
+
+
+// import { TOGGLE_SIDEBAR } from '../utils/actions/sidebar';
+// import { useDispatch } from 'react-redux';
+
+//Video
+// import {yoga} from "../../src/components/videos/yoga.mp4";
 
 const Home = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   return (
-    <div className="container">
-      <a
+    <>
+      {/* <a
         onClick={() => dispatch({
           type: TOGGLE_SIDEBAR,
           payload: {
             action: true
           }
         })}
-      >Splash Page</a>
-    </div>
+      >Splash Page</a> */}
+    
+
+      <HeroSection />
+    
+    
+    
+    </>
+
+// const Home = () => {
+//   return (
+//     <div className="container">
+//       <a
+//         href='#'
+//       >Splash Page</a>
+//     </div>
   );
 };
+
 
 export default Home;
