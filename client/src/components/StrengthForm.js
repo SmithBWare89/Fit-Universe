@@ -6,10 +6,12 @@ import {
     Segment
 } from 'semantic-ui-react';
 import {useDispatch} from 'react-redux';
+import {repOptions, weightOptions} from '../utils/helpers/setsAndRepsOptions';
 
-export default function StrengthForm({props}) {
-    const [numberSets, setNumberSets] = useState(0);
-    const [workoutState, setWorkOutState ] = useState({});
+export default function StrengthForm({props, workoutState, setWorkOutState}) {
+    const [ numberSets, setNumberSets] = useState(0);
+    console.log(workoutState)
+
     const dispatch = useDispatch();
     const liftVarName = props[0];
     const liftName = props[1].name;
@@ -19,29 +21,6 @@ export default function StrengthForm({props}) {
         Input,
         Select
     } = Form;
-    
-    const repOptions = [
-        { key: 1, text: 1, value: 1},
-        { key: 2, text: 2, value: 2},
-        { key: 3, text: 3, value: 3},
-        { key: 4, text: 4, value: 4},
-        { key: 5, text: 5, value: 5},
-        { key: 6, text: 6, value: 6},
-        { key: 7, text: 7, value: 7},
-        { key: 8, text: 8, value: 8},
-        { key: 9, text: 9, value: 9},
-        { key: 10, text: 10, value: 10},
-        { key: 11, text: 11, value: 11},
-        { key: 12, text: 12, value: 12},
-        { key: 13, text: 13, value: 13},
-        { key: 14, text: 14, value: 14},
-        { key: 15, text: 15, value: 15},
-        { key: 16, text: 16, value: 16},
-        { key: 17, text: 17, value: 17},
-        { key: 18, text: 18, value: 18},
-        { key: 19, text: 19, value: 19},
-        { key: 20, text: 20, value: 20},
-    ]
 
     const setsArray = (() => {
         const emptyArray = []
@@ -69,11 +48,9 @@ export default function StrengthForm({props}) {
                                         /* 
                                             The two const declarations will find the last div of rep/weight fields then grabs their name
                                         */
-                                        const weightField = Array.from(document.querySelectorAll(`.${liftVarName}-weight`)).pop().lastChild.firstChild.getAttribute('name');
                                         const repField = Array.from(document.querySelectorAll(`.${liftVarName}-rep`)).pop().lastChild.getAttribute('name');
+                                        const weightField = Array.from(document.querySelectorAll(`.${liftVarName}-weight`)).pop().lastChild.getAttribute('name');
                                         // Then we can also remove the property from the workout state as well
-
-
                                         setWorkOutState(
                                             delete workoutState[weightField],
                                             delete workoutState[repField]
@@ -95,7 +72,8 @@ export default function StrengthForm({props}) {
                     ? (
                         setsArray.map((item, index) => {
                             const repName = `${liftVarName}-rep-${index}`;
-                            const weightName = `${liftVarName}-weight-${index}`
+                            const weightName = `${liftVarName}-weight-${index}`;
+
                             if (!workoutState.hasOwnProperty(repName)) {
                                 setWorkOutState(
                                     {
@@ -105,17 +83,18 @@ export default function StrengthForm({props}) {
                                     }
                                 )
                             }
-                            
+                           
                             return <>
-                            <Group widths='equal'>
+                            <Group widths='equal' inline>
+                                <>
                                 <Select 
-                                    fluid 
-                                    label='Reps' 
+                                    label={{children: 'Number Of Reps'}} 
                                     placeholder='Select Reps' 
                                     options={repOptions} 
                                     name={repName}
-                                    value={workoutState[repName]}
                                     className={`${liftVarName}-rep`}
+                                    width={5}
+                                    required
                                     key={`${repName}-key`}
                                     onChange={(e) => {
                                         setWorkOutState(
@@ -126,22 +105,23 @@ export default function StrengthForm({props}) {
                                         )
                                     }}
                                 />
-                                <Input 
-                                    fluid 
+                                </>
+                                <Select 
                                     placeholder='Enter Weight' 
-                                    label='Weight' 
+                                    label={{children: 'Weight'}}  
                                     name={weightName}
-                                    value={workoutState[weightName]}
+                                    options={weightOptions}
                                     className={`${liftVarName}-weight`}
                                     key={`${weightName}-key`}
+                                    width={5}
+                                    required
                                     onChange={(e) => {
                                         setWorkOutState(
                                             {
                                                 ...workoutState,
-                                                [weightName]: e.target.value
+                                                [weightName]: e.target.firstChild.textContent
                                             }
                                         )
-                                        console.log(workoutState[weightName])
                                     }}
                                 />
                             </Group>

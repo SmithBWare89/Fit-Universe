@@ -36,8 +36,8 @@ function App() {
         <Provider store={store}>
           <MenuSidebar />
           <Navigation className="navigation"/>
-          <Grid>
-              <Grid.Column width={14}>
+          <Grid style={{marginTop: '50px'}}>
+              <Grid.Column>
                 <Switch>
                   <Route exact path="/" component={Home} />                  
                   <Route exact path="/login" component={Login} />
@@ -46,9 +46,9 @@ function App() {
                   <Route component={NoMatch} />
                 </Switch>
               </Grid.Column>
-              <Grid.Column width={2}>
+              {/* <Grid.Column width={2}>
                 <h1>Side Menu!</h1>
-              </Grid.Column>
+              </Grid.Column> */}
           </Grid>
         </Provider>
     </Router>

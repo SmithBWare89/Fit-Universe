@@ -14,7 +14,7 @@ import {
 import {
     addSets,
     deleteSets
-} from '../determineSets';
+} from '../helpers/determineSets';
 
 export default function strengthMovementsReducer(state ={
     flatBench: {

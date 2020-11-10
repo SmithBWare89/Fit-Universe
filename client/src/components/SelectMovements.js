@@ -32,7 +32,7 @@ export default function SelectMovements() {
                     {
                         Object.entries(state).map((movement, index) => {
                             return <>
-                                <Field 
+                                <Form.Field 
                                     label={movement[1].name}
                                     name={movement[1].name}
                                     type='checkbox'
