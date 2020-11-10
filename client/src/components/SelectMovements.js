@@ -21,12 +21,11 @@ export default function SelectMovements() {
         <Modal
             closeIcon
             open={open}
-            trigger={<Button>Select Your Movements</Button>}
+            trigger={<Button key='select-modal' id='select-modal' size='large' style={{marginBottom: '20px'}}>Select Your Movements</Button>}
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
-            key='select-modal'
         >
-            <Header>Select Your Movements</Header>
+            <Header as='h1' key='select-movement-header' id='select-movement-header'>Select Your Movements</Header>
             <Modal.Content key='select-modal-content'>
                 <Group grouped key='select-modal-group'>
                     {

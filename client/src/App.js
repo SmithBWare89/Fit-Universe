@@ -21,10 +21,12 @@ import Navigation from './components/Navigation';
 // Actions and Reducers
 import sidebarReducer from './utils/reducers/sidebar';
 import strengthMovementsReducer from './utils/reducers/strengthMovements';
+import errorModalReducer from './utils/reducers/errorModal';
 
 const rootReducer = combineReducers({
   sidebarReducer,
-  strengthMovementsReducer
+  strengthMovementsReducer,
+  errorModalReducer
 })
 
 function App() {
@@ -36,8 +38,8 @@ function App() {
         <Provider store={store}>
           <MenuSidebar />
           <Navigation className="navigation"/>
-          <Grid style={{marginTop: '50px'}}>
-              <Grid.Column>
+          <Grid>
+              <Grid.Column >
                 <Switch>
                   <Route exact path="/" component={Home} />                  
                   <Route exact path="/login" component={Login} />
@@ -46,9 +48,6 @@ function App() {
                   <Route component={NoMatch} />
                 </Switch>
               </Grid.Column>
-              {/* <Grid.Column width={2}>
-                <h1>Side Menu!</h1>
-              </Grid.Column> */}
           </Grid>
         </Provider>
     </Router>

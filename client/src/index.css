@@ -5,6 +5,11 @@
     --white: #ffffff;
 }
 
+#root {
+    background-color: var(--munsell);
+    height: 100%;
+}
+
 /* NavBar Styling Start */
 .ui.secondary.menu {
     background-color: var(--beau) !important;
@@ -42,3 +47,24 @@
     background-color: var(--beau) !important;
 }
 /* Sidebar Menu Styling End */
+
+/* StrengthForm Style Start */
+.ui.button.addSet, .ui.button.deleteSet {
+    background-color: var(--beau);
+}
+
+#select-modal {
+    background-color: var(--beau);
+}
+
+#select-movement-header {
+    font-size: 4.0rem !important;
+}
+
+.error {
+    position: relative;
+    animation: shake .1s linear;
+    animation-iteration-count: 3;
+    background-color: red !important;
+}
+/* StrengthForm Style End */

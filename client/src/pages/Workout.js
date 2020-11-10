@@ -10,7 +10,7 @@ import SelectMovements from '../components/SelectMovements';
 export default function Workout() {
     const [ workoutType, setWorkoutType ] = useState();
     const workoutTypeOptions = [
-        { key: 'select', text: 'Select Workout Type', value: 'Select Workout Type', id: 'selectWorkout', readOnly: true },
+        { key: 'select', text: 'Select Workout Type', value: 'Select Workout Type', id: 'selectWorkout' , default: true},
         { key: 'strength', text: 'Strength', value: 'Strength', id: 'Strength' },
         { key: 'cardio', text: 'Cardio', value: 'Cardio', id: 'Cardio' }
     ];
@@ -26,12 +26,11 @@ export default function Workout() {
     }
 
     return (
-        <>
         <Container>
             <Form id="Form">
                 <Form.Field 
                     control={Select}
-                    label='Select Workout Type'
+                    label={<h1>Select A Workout</h1>}
                     options={workoutTypeOptions}
                     placeholder='Select Workout Type'
                     id="form-control-workout-type"
@@ -41,16 +40,14 @@ export default function Workout() {
                 />
             </Form>
             <div style={{marginTop: '10px'}}>
-                <SelectMovements />
             </div>
-        </Container>
-        <Container>
             {
                 workoutType === 'selectWorkout'
                     ? (<h1>Select A Workout Type!</h1>)
                     : workoutType === 'Strength'
                     ? (
                         <Container style={{marginTop: '10px'}}>
+                            <SelectMovements />
                             <StrengthLog />
                         </Container>
                     )
@@ -59,6 +56,5 @@ export default function Workout() {
                         : (<h1>Select A Workout Type!</h1>)
             }
         </Container>
-        </>
     )
 }

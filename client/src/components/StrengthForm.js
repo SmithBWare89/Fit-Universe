@@ -3,15 +3,14 @@ import {
     Form,
     Button,
     Header,
-    Segment
+    Segment,
+    Icon
 } from 'semantic-ui-react';
 import {useDispatch} from 'react-redux';
 import {repOptions, weightOptions} from '../utils/helpers/setsAndRepsOptions';
 
 export default function StrengthForm({props, workoutState, setWorkOutState}) {
     const [ numberSets, setNumberSets] = useState(0);
-    console.log(workoutState)
-
     const dispatch = useDispatch();
     const liftVarName = props[0];
     const liftName = props[1].name;
@@ -35,16 +34,29 @@ export default function StrengthForm({props, workoutState, setWorkOutState}) {
     }, [props, dispatch]);
 
     return (
-        <div>
-            <Header as='h1'>
+        <Segment style={{backgroundColor: 'var(--pewter)'}}>
+            <Header as='h1' style={{marginBottom: '10px'}}>
                 {liftName}
-                <Header.Subheader>
+                <Header.Subheader style={{marginTop: '5px', marginBottom: '15px'}}>
                     <Segment.Inline>
-                        <Button className="addSet" onClick={() => dispatch({type: `${props[1].addSet}`})}>+</Button>
+                        <Button 
+                            className="addSet" 
+                            onClick={() => dispatch({type: `${props[1].addSet}`})}
+                        >
+                            <Icon 
+                                name='plus'
+                                size='small'
+                                aria-label='Plus Sign'
+                                labelPosition='right'
+                            />
+                            Add Set
+                        </Button>
                         {
                             numberSets >= 1
                                 ? (
-                                    <Button className="deleteSet" onClick={(e) => {
+                                    <Button 
+                                        className="deleteSet"
+                                        onClick={(e) => {
                                         /* 
                                             The two const declarations will find the last div of rep/weight fields then grabs their name
                                         */
@@ -56,12 +68,28 @@ export default function StrengthForm({props, workoutState, setWorkOutState}) {
                                             delete workoutState[repField]
                                         )
                                         dispatch({type: `${props[1].deleteSet}`})
-                                    }}>x</Button>
+                                    }}>
+                                        <Icon 
+                                            name='delete'
+                                            size='small'
+                                            aria-label='Delete Button'
+                                            labelPosition='right'
+                                        />
+                                        Delete Button
+                                    </Button>
                                 )
                                 : (
                                     <Button className="deleteSet" onClick={(e) => {                                    
                                         dispatch({type: `${props[1].reducer}`})
-                                    }}>x</Button>
+                                    }}>
+                                        <Icon 
+                                            name='delete'
+                                            size='small'
+                                            aria-label='Delete Button'
+                                            labelPosition='right'
+                                        />
+                                        Delete Button
+                                    </Button>
                                 )
                         }
                     </Segment.Inline>
@@ -85,15 +113,17 @@ export default function StrengthForm({props, workoutState, setWorkOutState}) {
                             }
                            
                             return <>
-                            <Group widths='equal' inline>
-                                <>
-                                <Select 
-                                    label={{children: 'Number Of Reps'}} 
+                            <div>
+                                <h2>Set {index}</h2>
+                            </div>
+                            <Group widths='equal' style={{marginBottom: '10px'}}>
+                                <Form.Select 
+                                    label={'Number Of Reps'} 
                                     placeholder='Select Reps' 
                                     options={repOptions} 
                                     name={repName}
                                     className={`${liftVarName}-rep`}
-                                    width={5}
+                                    width={1}
                                     required
                                     key={`${repName}-key`}
                                     onChange={(e) => {
@@ -105,21 +135,26 @@ export default function StrengthForm({props, workoutState, setWorkOutState}) {
                                         )
                                     }}
                                 />
-                                </>
-                                <Select 
-                                    placeholder='Enter Weight' 
-                                    label={{children: 'Weight'}}  
+                                <Input 
+                                    placeholder='Enter Weight'
+                                    label={{children: 'Weight'}}
                                     name={weightName}
-                                    options={weightOptions}
                                     className={`${liftVarName}-weight`}
                                     key={`${weightName}-key`}
-                                    width={5}
+                                    width={1}
                                     required
                                     onChange={(e) => {
+                                        if (isNaN(e.target.value) || e.target.value.length > 4 || e.target.value > 1000) {
+                                            const input = e.target;
+                                            input.classList.add('error');
+                                            setTimeout(function() {
+                                                input.classList.remove('error')
+                                            }, 300)
+                                        }
                                         setWorkOutState(
                                             {
                                                 ...workoutState,
-                                                [weightName]: e.target.firstChild.textContent
+                                                [weightName]: e.target.value
                                             }
                                         )
                                     }}
@@ -131,6 +166,6 @@ export default function StrengthForm({props, workoutState, setWorkOutState}) {
                     )
                     : ''
                  }
-        </div>
+        </Segment>
     )
 }

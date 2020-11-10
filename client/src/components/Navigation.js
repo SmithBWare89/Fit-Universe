@@ -17,8 +17,6 @@ export default function Navigation() {
     return (
         <Menu 
             secondary
-            centered
-            fixed='top'
         >
             <Menu.Menu centered>
                 <Menu.Item
