@@ -53,7 +53,6 @@ const LoginForm = props => {
     });
   };
     return (
-
       <div className="login-container">
         <video src={run} autoPlay loop muted type="video/mp4" />
         <Grid
@@ -97,9 +96,9 @@ const LoginForm = props => {
                   style={{ backgroundColor: "#508CA4" }}
                   fluid
                   size="large"
-                  type="submit"    
+                  type="submit"
                 >
-                  Login
+                  <a style={{color:"white"}} href="/dashboard"> Login </a>
                 </Button>
               </Segment>
             </Form>

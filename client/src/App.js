@@ -16,6 +16,7 @@ import NoMatch from "./pages/NoMatch";
 import Header from "../src/components/Header";
 import MenuSidebar from '../src/components/MenuSidebar';
 import Navigation from './components/Navigation';
+import Dashboard from    "./components/Dashboard"
 
 import { state } from './utils/GlobalState';
 
@@ -49,15 +50,16 @@ function App() {
           {/* <MenuSidebar />
           <Navigation className="navigation"/> */}
           <Grid>
-              <Grid.Column width={16}>
-                <Switch>
-                  <Route exact path="/" component={Home} />                  
-                  <Route exact path="/login" component={Login} />
-                  <Route exact path="/signup" component={Signup} />
-                  <Route component={NoMatch} />
-                </Switch>
-              </Grid.Column>
-              {/* <Grid.Column width={2}>
+            <Grid.Column width={16}>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={Signup} />
+                <Route exact path="/dashboard" component={Dashboard} />
+                <Route component={NoMatch} />
+              </Switch>
+            </Grid.Column>
+            {/* <Grid.Column width={2}>
                 <h1>Side Menu!</h1>
               </Grid.Column> */}
           </Grid>

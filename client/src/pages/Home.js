@@ -26,6 +26,7 @@ const Home = () => {
       <HeroSection />
     
     
+    
     </>
 
 // const Home = () => {
