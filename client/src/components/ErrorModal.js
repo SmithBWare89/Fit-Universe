@@ -16,17 +16,16 @@ export default function ErrorModal(){
         <Modal
             basic
             dimmer='blurring'
+            size = 'small'
             open={state.open}
         >
-            <Header icon>
+            <Header icon style={{textAlign: 'center'}}>
                 <Icon name='bug' size='large'/>
                 An Error Has Occurred!
-            </Header>
-            <Modal.Content>
                 <p>
                     {state.errorMessage}
                 </p>
-            </Modal.Content>
+            </Header>
             <Modal.Actions>
                 <Button
                     basic

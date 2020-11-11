@@ -10,7 +10,6 @@ export default function errorModalReducer(state = {
 }, payload) {
     switch(payload.type) {
         case OPEN_MODAL:
-            console.log(payload)
             return {
                 ...state,
                 open: !state.open,

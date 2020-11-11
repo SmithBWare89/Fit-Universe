@@ -6,12 +6,15 @@ import {
     Segment,
     Icon
 } from 'semantic-ui-react';
-import {useDispatch} from 'react-redux';
-import {repOptions, weightOptions} from '../utils/helpers/setsAndRepsOptions';
+import {useDispatch, useSelector} from 'react-redux';
+import {repOptions} from '../utils/helpers/setsAndRepsOptions';
+import {saveWorkout} from '../utils/helpers/idbPromise'
 
-export default function StrengthForm({props, workoutState, setWorkOutState}) {
-    const [ numberSets, setNumberSets] = useState(0);
+export default function StrengthForm({props, workoutState, setWorkOutState, setUsedReducer}) {
+    const [ numberSets, setNumberSets ] = useState(0);
+    const movementState = useSelector(state => state.strengthMovementsReducer);
     const dispatch = useDispatch();
+    let setIndex;
     const liftVarName = props[0];
     const liftName = props[1].name;
     
@@ -30,8 +33,9 @@ export default function StrengthForm({props, workoutState, setWorkOutState}) {
     })();
 
     useEffect(() => {
-        setNumberSets(props[1].sets);
-    }, [props, dispatch]);
+        setNumberSets(movementState[props[0]].sets)
+        saveWorkout(workoutState)
+    }, [workoutState, movementState, dispatch]);
 
     return (
         <Segment style={{backgroundColor: 'var(--pewter)'}}>
@@ -39,34 +43,39 @@ export default function StrengthForm({props, workoutState, setWorkOutState}) {
                 {liftName}
                 <Header.Subheader style={{marginTop: '5px', marginBottom: '15px'}}>
                     <Segment.Inline>
-                        <Button 
-                            className="addSet" 
-                            onClick={() => dispatch({type: `${props[1].addSet}`})}
-                        >
+                        <Button className="addSet" onClick={(e) => {
+                            e.preventDefault();                   
+                            dispatch({type: `${props[1].addSet}`})
+                        }}>
                             <Icon 
-                                name='plus'
+                                name='add'
                                 size='small'
-                                aria-label='Plus Sign'
-                                labelPosition='right'
+                                aria-label='Add Button'
                             />
                             Add Set
                         </Button>
                         {
-                            numberSets >= 1
+                            numberSets > 0
                                 ? (
                                     <Button 
                                         className="deleteSet"
                                         onClick={(e) => {
+                                        e.preventDefault();
                                         /* 
                                             The two const declarations will find the last div of rep/weight fields then grabs their name
                                         */
-                                        const repField = Array.from(document.querySelectorAll(`.${liftVarName}-rep`)).pop().lastChild.getAttribute('name');
-                                        const weightField = Array.from(document.querySelectorAll(`.${liftVarName}-weight`)).pop().lastChild.getAttribute('name');
+                                        const repField = Array.from(document.querySelectorAll(`.${liftVarName}-rep-${numberSets}`)).pop();
+                                        const weightField = Array.from(document.querySelectorAll(`.${liftVarName}-weight-${numberSets}`)).pop();
                                         // Then we can also remove the property from the workout state as well
+                                        if(workoutState.length === 1) {
+                                            setWorkOutState({})
+                                        }
+
                                         setWorkOutState(
                                             delete workoutState[weightField],
                                             delete workoutState[repField]
                                         )
+
                                         dispatch({type: `${props[1].deleteSet}`})
                                     }}>
                                         <Icon 
@@ -79,14 +88,15 @@ export default function StrengthForm({props, workoutState, setWorkOutState}) {
                                     </Button>
                                 )
                                 : (
-                                    <Button className="deleteSet" onClick={(e) => {                                    
+                                    <Button className="deleteSet" onClick={(e) => {
+                                        e.preventDefault();     
+                                        setWorkOutState({})                      
                                         dispatch({type: `${props[1].reducer}`})
                                     }}>
                                         <Icon 
                                             name='delete'
                                             size='small'
                                             aria-label='Delete Button'
-                                            labelPosition='right'
                                         />
                                         Delete Button
                                     </Button>
@@ -101,28 +111,17 @@ export default function StrengthForm({props, workoutState, setWorkOutState}) {
                         setsArray.map((item, index) => {
                             const repName = `${liftVarName}-rep-${index}`;
                             const weightName = `${liftVarName}-weight-${index}`;
-
-                            if (!workoutState.hasOwnProperty(repName)) {
-                                setWorkOutState(
-                                    {
-                                        ...workoutState,
-                                        [repName]: '',
-                                        [weightName]: ''
-                                    }
-                                )
-                            }
-                           
                             return <>
                             <div>
                                 <h2>Set {index}</h2>
                             </div>
                             <Group widths='equal' style={{marginBottom: '10px'}}>
-                                <Form.Select 
+                                <Select 
                                     label={'Number Of Reps'} 
                                     placeholder='Select Reps' 
                                     options={repOptions} 
                                     name={repName}
-                                    className={`${liftVarName}-rep`}
+                                    className={`${liftVarName}-rep-${index}`}
                                     width={1}
                                     required
                                     key={`${repName}-key`}

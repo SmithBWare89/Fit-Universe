@@ -18,7 +18,7 @@ export default function Navigation() {
         <Menu 
             secondary
         >
-            <Menu.Menu centered>
+            <Menu.Menu >
                 <Menu.Item
                     as='a'
                     onClick={toggleSidebar}
@@ -42,7 +42,7 @@ export default function Navigation() {
                     <i className="fas fa-shopping-cart fa-3x"></i>
                 </Menu.Item>
             </Menu.Menu>
-            <Menu.Menu centered position='right'>
+            <Menu.Menu position='right'>
                 <Menu.Item as='a'>
                     <i className="fas fa-sign-out-alt fa-3x" />
                 </Menu.Item>

@@ -11,11 +11,6 @@ import {
 
 } from '../actions/UpperBody/Push/strengthMovements';
 
-import {
-    addSets,
-    deleteSets
-} from '../helpers/determineSets';
-
 export default function strengthMovementsReducer(state ={
     flatBench: {
         triggered: false,
@@ -64,7 +59,7 @@ export default function strengthMovementsReducer(state ={
                     reducer: state.flatBench.reducer,
                     addSet: state.flatBench.addSet,
                     deleteSet: state.flatBench.deleteSet,
-                    sets: addSets(state.flatBench.sets)
+                    sets: state.flatBench.sets+1
                 }
             }
         case DELETE_FLAT_BENCH_SET:
@@ -76,7 +71,7 @@ export default function strengthMovementsReducer(state ={
                     reducer: state.flatBench.reducer,
                     addSet: state.flatBench.addSet,
                     deleteSet: state.flatBench.deleteSet,
-                    sets: deleteSets(state.flatBench.sets)
+                    sets: state.flatBench.sets-1
                 }
             }
         case INCLINE_BENCH:
@@ -100,7 +95,7 @@ export default function strengthMovementsReducer(state ={
                     reducer: state.inclineBench.reducer,
                     addSet: state.inclineBench.addSet,
                     deleteSet: state.inclineBench.deleteSet,
-                    sets: addSets(state.inclineBench.sets)
+                    sets: state.inclineBench.sets+1
                 }
             }
         case DELETE_INCLINE_BENCH_SET:
@@ -112,7 +107,7 @@ export default function strengthMovementsReducer(state ={
                     reducer: state.inclineBench.reducer,
                     addSet: state.inclineBench.addSet,
                     deleteSet: state.inclineBench.deleteSet,
-                    sets: deleteSets(state.inclineBench.sets)
+                    sets: state.inclineBench.sets-1
                 }
             }
         case DECLINE_BENCH:
@@ -136,7 +131,7 @@ export default function strengthMovementsReducer(state ={
                     reducer: state.declineBench.reducer,
                     addSet: state.declineBench.addSet,
                     deleteSet: state.declineBench.deleteSet,
-                    sets: addSets(state.declineBench.sets)                }
+                    sets: state.declineBench.sets+1                }
             }
         case DELETE_DECLINE_BENCH_SET:
             return {
@@ -147,7 +142,7 @@ export default function strengthMovementsReducer(state ={
                     reducer: state.declineBench.reducer,
                     addSet: state.declineBench.addSet,
                     deleteSet: state.declineBench.deleteSet,
-                    sets: deleteSets(state.declineBench.sets)
+                    sets: state.declineBench.sets-1
                 }
             }
         default:

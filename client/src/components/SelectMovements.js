@@ -30,16 +30,14 @@ export default function SelectMovements() {
                 <Group grouped key='select-modal-group'>
                     {
                         Object.entries(state).map((movement, index) => {
-                            return <>
-                                <Form.Field 
+                            return <Form.Field 
+                                    key={`${movement[0]}-selection-${index}`}
                                     label={movement[1].name}
                                     name={movement[1].name}
                                     type='checkbox'
                                     control='input'
-                                    key={`${movement[0]}-selection-${index}`}
                                     onClick={() => dispatch({type: `${movement[1].reducer}`})}
                                 />
-                            </>
                         })
                     }
                 </Group>
