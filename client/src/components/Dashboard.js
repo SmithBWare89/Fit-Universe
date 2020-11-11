@@ -16,7 +16,7 @@ import {
 function Dashboard() {
     return (
       <>
-      <MenuSidebar/>
+     Dashboard
 
       </>
     );

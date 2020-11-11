@@ -33,10 +33,12 @@ const client = new ApolloClient({
     operation.setContext({
       headers: {
         authorization: token ? `Bearer ${token}` : "",
+       
+     
       },
     });
   },
-  uri: "http://localhost:3000/graphql",
+  uri: "/graphql",
 });
 
 function App() {
