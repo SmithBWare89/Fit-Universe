@@ -4,24 +4,24 @@ import { Link } from "react-router-dom";
 const PostList = ({ posts, title }) => {
 
   
-  // if (!posts.length) {
-  //   return (
-  //     <h3 className="" style={{}}>
-      
-  //     </h3>
-  //   );
-  // }
+  if (!posts.length) {
+    return (
+      <h3 className="" style={{}}>
+      No Posts Yet...
+      </h3>
+    );
+  }
 
   return (
     <>
-      {/* <div className="" >
+      <div className="" >
         <h3>{title}</h3>
         {posts &&
           posts.map((post) => (
             <div key={post._id} className="ui raised card">
               <p className="header">
                 <Link
-                  to={`/dashboard/${post.username}`}
+                  to={`/blog/${post.username}`}
                   style={{ fontWeight: 700 }}
                   className=""
                 >
@@ -37,7 +37,7 @@ const PostList = ({ posts, title }) => {
               </div>
             </div>
           ))}
-      </div> */}
+      </div>
 
 
       

@@ -59,10 +59,10 @@ const PostForm = () => {
   return (
     // < className=" twelve wide field centered">
     <div
-      class="ui column stackable center page grid"
+      className="ui column stackable center page grid"
       style={{ backgroundColor: "#BFD7EA" }}
     >
-      <div class="four wide column"></div>
+      <div className="four wide column"></div>
 
       <form
         style={{ width: 500 }}
@@ -75,13 +75,13 @@ const PostForm = () => {
           className=""
           onChange={handleChange}
         ></textarea>
-        <div
+        <button
           style={{ backgroundColor: "#508CA4" ,color:"#fff"}}
           className="ui bottom attached button"
           type="submit"
         >
           Submit
-        </div>
+        </button>
         <p
           className={`m-0 ${
             characterCount === 280 || error ? "text-error" : ""

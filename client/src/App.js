@@ -11,7 +11,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NoMatch from "./pages/NoMatch";
-import Blog from "./pages/Blog"
+import Blog from "./pages/Blog";
+import SinglePost from "./pages/SinglePost";
 
 //Components
 import Header from "../src/components/Header";
@@ -60,6 +61,7 @@ function App() {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/blog" component={Blog} />
+                <Route exact path="/singlepost" component={SinglePost} />
                 <Route component={NoMatch} />
               </Switch>
             </Grid.Column>

@@ -4,7 +4,7 @@ import PostList from "../components/PostList";
 
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/react-hooks';
-import { QUERY_POSTS } from "../utils/queries";
+import { QUERY_POSTS , QUERY_ME} from "../utils/queries";
 
 import {
   Button,
@@ -21,7 +21,7 @@ import {
 
 const Blog= () => {
   const { loading, data } = useQuery(QUERY_POSTS);
-//   const { data: userData } = useQuery(QUERY_ME_BASIC);
+ 
   const posts = data?.posts || [];
 
   const loggedIn = Auth.loggedIn();
@@ -33,23 +33,30 @@ const Blog= () => {
         style={{ backgroundColor: "#508CA4", color: "#fff" }}
       >
         Blog
-        <i class="rocketchat icon"></i>
+        <i className="rocketchat icon"> </i>
       </h2>
 
-      {/* <div className="ui segment"> */}
-      {loggedIn && (
-        <div>
-          <PostForm />
+      <div className=""> 
+       {loggedIn && (
+          <div>
+            <PostForm />
+          </div> 
+        )}
         </div>
-      )}
 
-      
-        <div className=" content four wide column">
-          <h3>Posts</h3>
+      <div>
+        <div>
           <PostList posts={posts} title="Post something" />
         </div>
-      
-      {/* </div> */}
+
+        <div className={` ${loggedIn && ""}`}>
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <PostList posts={posts} title="Some Feed for Thought(s)..." />
+          )}
+        </div>
+      </div>
     </>
   );
 }
