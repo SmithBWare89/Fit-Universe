@@ -96,10 +96,13 @@ const LoginForm = props => {
                   size="large"
                   type="submit"
                 >
-                  <a style={{color:"white"}} href="/dashboard"> Login </a>
+                  {/* <a style={{color:"white"}} href="/dashboard">  */}
+                  Login
+                  {/* </a> */}
                 </Button>
               </Segment>
             </Form>
+            {error && <div>Login failed</div>}
             <Message>
               New to us? <a href="/signup">Sign Up</a>
             </Message>
