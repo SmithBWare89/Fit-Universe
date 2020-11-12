@@ -8,15 +8,18 @@ import {
 } from 'semantic-ui-react';
 import {useDispatch, useSelector} from 'react-redux';
 import {repOptions} from '../utils/helpers/setsAndRepsOptions';
-import {saveWorkout} from '../utils/helpers/idbPromise'
+import {saveWorkout} from '../utils/helpers/idbPromise';
+import {
+    useMutation
+} from '@apollo/react-hooks';
 
 export default function StrengthForm({props, workoutState, setWorkOutState, setUsedReducer}) {
     const [ numberSets, setNumberSets ] = useState(0);
     const movementState = useSelector(state => state.strengthMovementsReducer);
     const dispatch = useDispatch();
-    let setIndex;
     const liftVarName = props[0];
     const liftName = props[1].name;
+    const [addStrength, {error}] = useMutation()
     
     const {
         Group,
@@ -35,6 +38,7 @@ export default function StrengthForm({props, workoutState, setWorkOutState, setU
     useEffect(() => {
         setNumberSets(movementState[props[0]].sets)
         saveWorkout(workoutState)
+        
     }, [workoutState, movementState, dispatch]);
 
     return (

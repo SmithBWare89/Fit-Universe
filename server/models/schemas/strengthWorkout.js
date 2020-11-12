@@ -7,7 +7,7 @@ const strengthSchema = new Schema ({
         type: Schema.Types.ObjectId,
         default: () => new Types.ObjectId()
     },
-    movementName: {
+    movements: {
         type: Array,
         required: true
     },

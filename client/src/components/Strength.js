@@ -19,8 +19,6 @@ export default function StrengthLog() {
 
     function handleSubmit(e) {
         const workoutStateLength = Object.keys(workoutState).length;
-        console.log(workoutState)
-        console.log(workoutState.length)
         if (workoutStateLength === 0) {
             dispatch({type: OPEN_MODAL, errorMessage: 'Please fill out all form elements!'})
         }
