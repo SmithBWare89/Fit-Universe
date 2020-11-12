@@ -5,6 +5,9 @@ const Post = require("../models/Post");
 
 
 
+const { User, Post, Strength } = require('../models');
+const { signToken } = require('../utils/auth');
+
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
@@ -60,6 +63,7 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+<<<<<<< HEAD
     addPost: async (parent, args, context) => {
       console.log(args, context);
       if (context.user) {
@@ -80,5 +84,27 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
   },
+=======
+    addStrength: async (parent, args , context) => {
+            if (context.user) {
+                const movementData = args.movementData;
+                const workoutData = await Strength.create({movementData});
+                const userData = await User.findByIdAndUpdate(
+                    context.user._id,
+                    {
+                        $push: {
+                            strengthWorkouts: workoutData.strengthWorkoutId
+                        }
+                    },
+                    {
+                        new: true
+                    }
+                )
+                return userData;
+            }
+            throw new AuthenticationError('Not logged in');
+    }
+}
+>>>>>>> 631079c4ccb17b2f62252ae226917dd55178f562
 };
 module.exports = resolvers;

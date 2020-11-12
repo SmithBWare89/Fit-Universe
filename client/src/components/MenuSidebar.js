@@ -1,12 +1,7 @@
 import React from 'react';
 import {
-  Button,
   Grid,
-  Header,
-  Icon,
-  Image,
   Menu,
-  Segment,
   Sidebar,
 } from 'semantic-ui-react';
 import { TOGGLE_SIDEBAR } from '../utils/actions/sidebar';
@@ -14,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export default function MenuSidebar() {
     const dispatch = useDispatch();
-    const state = useSelector(state => state);
+    const state = useSelector(state => state.sidebarReducer);
     const { sidebarMenu } = state
     
     return (
@@ -30,24 +25,17 @@ export default function MenuSidebar() {
                     visible={sidebarMenu.visible}
                     inverted
                     vertical
-                    // width='thin'
                     className="menuSidebar"
                 >
                     <Menu.Item as='a' onClick={() => dispatch({type: TOGGLE_SIDEBAR})}>
                         <span className="menu-item">
-                            <i className="fas menu-icon fa-user" />
+                            <i className="fas menu-icon fa-user" key='user-profile-icon'/>
                              Profile
                         </span>
                     </Menu.Item>
-                    {/* <Menu.Item as='a' onClick={() => dispatch({type: TOGGLE_SIDEBAR})}>
-                        <span class="menu-item">
-                            <i class="fas menu-icon fa-pager" />
-                             Coaching
-                        </span>
-                    </Menu.Item> */}
                     <Menu.Item as='a' onClick={() => dispatch({type: TOGGLE_SIDEBAR})}>
                         <span className="menu-item">
-                            <i className="fas menu-icon fa-cog" />
+                            <i className="fas menu-icon fa-cog" key='settings-cog'/>
                              Settings
                         </span>
                     </Menu.Item>

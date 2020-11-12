@@ -1,13 +1,10 @@
-// import the gql tagged template function
-const { gql } = require("apollo-server-express");
-
+const { gql } = require('apollo-server-express');
 const typeDefs = gql`
   type User {
     _id: ID
     username: String
     email: String
     posts: [Post]
-    
   }
   type Post {
     _id: ID
@@ -15,31 +12,56 @@ const typeDefs = gql`
     createdAt: String
     username: String
   }
-  type Comment {
-    _id: ID
-    commentBody: String
-    createdAt: String
-    username: String
-  }
-
   type Query {
     me: User
     users: [User]
     user(username: String!): User
-    posts(username: String): [Post]
-    post(_id: ID!): Post
   }
-  type Mutation {
-    login(email: String!, password: String!): Auth
-    addUser(username: String!, email: String!, password: String!): Auth
-    addPost(postText: String!): Post
+  type Strength {
+    strengthWorkoutId: ID
+    movementData: String!
+    createdAt: String
+  }
+
+  type Comments {
+    commendId: ID
+    commentBody: String
+    username: String
+    createdAt: String
+  }
+
+  type CardioWorkout {
+    cardioWorkoutId: ID
+    heartRate: Int
+    createdAt: String
+    time: Int
+    distanceTraveled: Int
+    pace: Int
+    comments: [Comments]
+  }
+
+  type User {
+    _id: ID
+    username: String
+    email: String
+    posts: [String]
+    friends: [String]
+    strengthWorkouts: [Strength]
+    cardioWorkouts: [CardioWorkout]
   }
 
   type Auth {
     token: ID!
     user: User
   }
+
+  type Mutation {
+    addStrength(movementData: String!): Strength
+    login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
+    addPost(postText: String!): Post
+    addFriend(friendId: ID!): User
+  }
 `;
 
-// export the typeDefs
 module.exports = typeDefs;
