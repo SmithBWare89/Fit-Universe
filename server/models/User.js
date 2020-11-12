@@ -3,7 +3,6 @@ const { Schema, model, Types } = mongoose;
 const bcrypt = require('bcrypt');
 const Post = require('./Post');
 const Strength = require('./StrengthWorkout');
-
 const profileSchema = require('./schemas/profileSchema');
 const cardioSchema = require('./schemas/cardioWorkout');
 

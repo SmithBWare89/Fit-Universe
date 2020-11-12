@@ -40,6 +40,20 @@ const client = new ApolloClient({
       },
     });
   },
+  uri: "http://localhost:3000/graphql",
+});
+
+const client = new ApolloClient({
+  request: (operation) => {
+    console.log(operation);
+    const token = localStorage.getItem("id_token");
+
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : "",
+      },
+    });
+  },
   uri: "http://localhost:3001/graphql",
 });
 
@@ -51,16 +65,20 @@ export default function App() {
     <Router>
       <ApolloProvider client={client}>
         <Provider store={store}>
-          <MenuSidebar />
-          <Navigation className="navigation"/>
           <Grid>
             <Grid.Column width={16}>
               <Switch>
                   <Route exact path="/" component={Home} />                  
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/signup" component={Signup} />
-                  <Route exact path="/workouts" component={Workout} />
-                  <Route exact path="/dashboard" component={Dashboard} />
+                  <Route exact path="/workouts" component={Workout>
+                      <MenuSidebar />
+                      <Navigation className="navigation"/>
+                  </Route>
+                  <Route exact path="/dashboard" component={Dashboard}>
+                      <MenuSidebar />
+                      <Navigation className="navigation"/>
+                  </Route>
                   <Route component={NoMatch} />
               </Switch>
             </Grid.Column>
