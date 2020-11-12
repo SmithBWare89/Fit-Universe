@@ -62,6 +62,13 @@ const typeDefs = gql`
     addPost(postText: String!): Post
     addFriend(friendId: ID!): User
   }
+ 
+    
+  
+
+  
+
+ 
 `;
 
 module.exports = typeDefs;

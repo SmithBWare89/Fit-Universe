@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 const User = require ("../models/User");
 const Post = require("../models/Post");
 
 
+=======
+const { AuthenticationError } = require('apollo-server-express');
+const { User, Post, Strength } = require('../models');
+const { signToken } = require('../utils/auth');
+>>>>>>> 631079c4ccb17b2f62252ae226917dd55178f562
 
 const { User, Post, Strength } = require('../models');
 const { signToken } = require('../utils/auth');
@@ -64,6 +70,7 @@ const resolvers = {
       return { token, user };
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
     addPost: async (parent, args, context) => {
       console.log(args, context);
       if (context.user) {
@@ -85,6 +92,8 @@ const resolvers = {
     },
   },
 =======
+=======
+>>>>>>> 631079c4ccb17b2f62252ae226917dd55178f562
     addStrength: async (parent, args , context) => {
             if (context.user) {
                 const movementData = args.movementData;
