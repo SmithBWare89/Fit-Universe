@@ -50,3 +50,5 @@ const typeDefs = gql`
         addFriend(friendId: ID!): User
     }
 `;
+
+module.exports = typeDefs;
