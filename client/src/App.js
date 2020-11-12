@@ -16,6 +16,7 @@ import Workout from './pages/Workout';
 //Components
 import MenuSidebar from '../src/components/MenuSidebar';
 import Navigation from './components/Navigation';
+import Dashboard from './components/Dashboard';
 
 // Actions and Reducers
 import sidebarReducer from './utils/reducers/sidebar';
@@ -30,41 +31,45 @@ const rootReducer = combineReducers({
 
 const client = new ApolloClient({
   request: (operation) => {
-    const token = localStorage.getItem('id_token')
+    console.log(operation);
+    const token = localStorage.getItem("id_token");
+
     operation.setContext({
       headers: {
-        authorization: token ? `Bearer ${token}` : ''
-      }
-    })
+        authorization: token ? `Bearer ${token}` : "",
+      },
+    });
   },
-  uri: '/graphql',
-})
+  uri: "http://localhost:3001/graphql",
+});
 
-function App() {
+export default function App() {
   // Redux Store
   const store = createStore(rootReducer)
 
   return (
-    <ApolloProvider client={client}>
-      <Router>
+    <Router>
+      <ApolloProvider client={client}>
         <Provider store={store}>
           <MenuSidebar />
           <Navigation className="navigation"/>
           <Grid>
-              <Grid.Column >
-                <Switch>
+            <Grid.Column width={16}>
+              <Switch>
                   <Route exact path="/" component={Home} />                  
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/signup" component={Signup} />
                   <Route exact path="/workouts" component={Workout} />
+                  <Route exact path="/dashboard" component={Dashboard} />
                   <Route component={NoMatch} />
-                </Switch>
-              </Grid.Column>
+              </Switch>
+            </Grid.Column>
+            {/* <Grid.Column width={2}>
+                <h1>Side Menu!</h1>
+              </Grid.Column> */}
           </Grid>
         </Provider>
-      </Router>
-    </ApolloProvider>
+      </ApolloProvider>
+    </Router>
   );
 }
-
-export default App;

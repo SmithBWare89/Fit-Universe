@@ -1,10 +1,14 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-    type StrengthWorkout {
-        _id: ID
+    type Query {
+        me: User
+        users: [User]
+        user(username: String!): User
+    }
+    type Strength {
         strengthWorkoutId: ID
-        movements: Array!
+        movementData: String!
         createdAt: String
     }
     
@@ -29,9 +33,9 @@ const typeDefs = gql`
         _id: ID
         username: String
         email: String
-        posts: Array
-        friends: Array
-        strengthWorkouts: [StrengthWorkout]
+        posts: [String]
+        friends: [String]
+        strengthWorkouts: [Strength]
         cardioWorkouts: [CardioWorkout]
     }
 
@@ -41,7 +45,10 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        addStrengthWorkout(movements: Array!)
+        addStrength(movementData: String!): Strength
+        login(email: String!, password: String!): Auth
+        addUser(username: String!, email: String!, password: String!): Auth
+        addFriend(friendId: ID!): User
     }
 `;
 

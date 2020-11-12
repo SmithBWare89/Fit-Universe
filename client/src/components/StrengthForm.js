@@ -9,12 +9,6 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {repOptions} from '../utils/helpers/setsAndRepsOptions';
 import {saveWorkout} from '../utils/helpers/idbPromise';
-import {
-    useMutation
-} from '@apollo/react-hooks';
-import {
-    ADD_STRENGTH
-} from '../utils/mutations';
 
 export default function StrengthForm({props, workoutState, setWorkOutState }) {
     const [ numberSets, setNumberSets ] = useState(0);
@@ -22,7 +16,6 @@ export default function StrengthForm({props, workoutState, setWorkOutState }) {
     const dispatch = useDispatch();
     const liftVarName = props[0];
     const liftName = props[1].name;
-    const [addStrength, {error}] = useMutation(ADD_STRENGTH);
     
     const {
         Group,
@@ -40,8 +33,6 @@ export default function StrengthForm({props, workoutState, setWorkOutState }) {
 
     useEffect(() => {
         setNumberSets(movementState[props[0]].sets)
-        saveWorkout(workoutState)
-        
     }, [workoutState, movementState, dispatch, props]);
 
     return (
@@ -139,6 +130,7 @@ export default function StrengthForm({props, workoutState, setWorkOutState }) {
                                                 [repName]: e.target.firstChild.textContent
                                             }
                                         )
+                                        console.log(workoutState)
                                     }}
                                 />
                                 <Input 
@@ -156,13 +148,13 @@ export default function StrengthForm({props, workoutState, setWorkOutState }) {
                                             setTimeout(function() {
                                                 input.classList.remove('error')
                                             }, 300)
-                                        }
+                                        };
                                         setWorkOutState(
                                             {
                                                 ...workoutState,
-                                                [weightName]: e.target.value
+                                                    [weightName]: e.target.value
                                             }
-                                        )
+                                        );
                                     }}
                                 />
                             </Group>

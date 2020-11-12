@@ -7,11 +7,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import StrengthForm from './StrengthForm';
 import {OPEN_MODAL} from '../utils/actions/errorModal';
 import ErrorModal from './ErrorModal';
+import {
+    useMutation
+} from '@apollo/react-hooks';
+import {
+    ADD_STRENGTH
+} from '../utils/mutations';
 
 
 
 export default function StrengthLog() {
-    const [ workoutState, setWorkOutState ] = useState({});
+    const [ workoutState, setWorkOutState ] = useState([]);
+    const [addStrength, {error}] = useMutation(ADD_STRENGTH);
     const dispatch = useDispatch();
     const state = useSelector(state => state.strengthMovementsReducer);
     const movement = Object.entries(state).map(movement => movement);
@@ -21,6 +28,8 @@ export default function StrengthLog() {
         if (workoutStateLength === 0) {
             dispatch({type: OPEN_MODAL, errorMessage: 'Please fill out all form elements!'})
         }
+        const jsonWorkoutState = JSON.stringify(workoutState);
+        addStrength({variables: {movementData: jsonWorkoutState}});
     }
    
     return (
