@@ -29,23 +29,19 @@ const resolvers = {
 
   Mutation: {
     addUser: async (parent, args) => {
-      console.log(args);
       const user = await User.create(args);
       const token = signToken(user);
 
       return { token, user };
     },
     login: async (parent, { email, password }) => {
-      console.log("trying to login");
       const user = await User.findOne({ email });
-      console.log(user)
 
       if (!user) {
         throw new AuthenticationError("Incorrect credentials");
       }
 
       const correctPw = await bcrypt.compare(password, user.password)
-      console.log(correctPw);
 
       if (!correctPw) {
         throw new AuthenticationError("Incorrect credentials");
@@ -55,8 +51,6 @@ const resolvers = {
       return { token, user };
     },
     addStrength: async (parent, {movementData} , {user}) => {
-          console.log(movementData);
-          console.log(user)
           const {email} = user;
           if(user.email) {
             const strengthWorkout = await Strength.create({movementData});
@@ -75,7 +69,6 @@ const resolvers = {
               }
             );
 
-            console.log(userData)
             return userData
           }
     }

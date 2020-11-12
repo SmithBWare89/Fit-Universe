@@ -32,7 +32,6 @@ const rootReducer = combineReducers({
 
 const client = new ApolloClient({
   request: (operation) => {
-    console.log(operation);
     const token = localStorage.getItem("id_token");
 
     operation.setContext({

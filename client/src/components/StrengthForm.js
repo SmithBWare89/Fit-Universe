@@ -128,7 +128,6 @@ export default function StrengthForm({props, workoutState, setWorkOutState }) {
                                                 [repName]: e.target.firstChild.textContent
                                             }
                                         )
-                                        console.log(workoutState)
                                     }}
                                 />
                                 <Input 

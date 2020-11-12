@@ -29,7 +29,6 @@ export function uploadWorkout() {
     const getAll = workoutObjectStore.getAll();
     getAll.onsuccess = function () {
         //save items to database
-        console.log('Hello!');
     }
 };
 

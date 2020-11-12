@@ -34,11 +34,9 @@ const LoginForm = props => {
     event.preventDefault();
 
     try {
-      console.log("will run mutation");
       const { data } = await login({
         variables: { ...formState }
       });
-      console.log(data);
 
       Auth.login(data.login.token);
     } catch (e) {
