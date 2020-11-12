@@ -8,9 +8,23 @@ const resolvers = {
     },
     Mutation: {
         addStrength: async (parent, args , context) => {
-            const movementData = args.movementData;
-            const workoutData = await Strength.create({movementData});
-            return workoutData;
+            if (context.user) {
+                const movementData = args.movementData;
+                const workoutData = await Strength.create({movementData});
+                const userData = await User.findByIdAndUpdate(
+                    context.user._id,
+                    {
+                        $push: {
+                            strengthWorkouts: workoutData.strengthWorkoutId
+                        }
+                    },
+                    {
+                        new: true
+                    }
+                )
+                return userData;
+            }
+            throw new AuthenticationError('Not logged in');
         }
     }
 };

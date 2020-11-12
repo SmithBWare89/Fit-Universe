@@ -44,8 +44,7 @@ const userSchema = new Schema (
                 type: Schema.Types.ObjectId,
                 ref: 'Strength'
             }
-        ],
-        cardioWorkouts: [cardioSchema]
+        ]
     },
     {
         toJSON: {
