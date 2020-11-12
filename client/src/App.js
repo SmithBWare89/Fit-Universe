@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route,Switch } from 'react-router-dom';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Menu } from 'semantic-ui-react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 import { Provider } from 'react-redux';
@@ -47,33 +47,33 @@ const client = new ApolloClient({
 export default function App() {
   // Redux Store
   const store = createStore(rootReducer)
+  const loggedIn = Auth.loggedIn();
 
   return (
     <Router>
       <ApolloProvider client={client}>
         <Provider store={store}>
+          {
+            loggedIn
+              ? (
+                <>
+                  <Navigation />
+                  <MenuSidebar />
+                </>
+              )
+              : ''
+          }
           <Grid>
             <Grid.Column width={16}>
               <Switch>
                   <Route exact path="/" component={Home} />                  
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/signup" component={Signup} />
-                  <Route exact path="/workouts" component={Workout}>
-                    <Navigation />
-                    <MenuSidebar />
-                    <Workout />
-                  </Route>
-                  <Route exact path="/dashboard" component={Dashboard}>
-                    <Navigation />
-                    <MenuSidebar />
-                    <Dashboard />
-                  </Route>
+                  <Route exact path="/workouts" component={Workout} />
+                  <Route exact path="/dashboard" component={Dashboard} />
                   <Route component={NoMatch} />
               </Switch>
             </Grid.Column>
-            {/* <Grid.Column width={2}>
-                <h1>Side Menu!</h1>
-              </Grid.Column> */}
           </Grid>
         </Provider>
       </ApolloProvider>
