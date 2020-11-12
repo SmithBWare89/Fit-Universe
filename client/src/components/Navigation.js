@@ -4,6 +4,7 @@ import {
 } from 'semantic-ui-react';
 import { TOGGLE_SIDEBAR } from '../utils/actions/sidebar';
 import { useDispatch } from 'react-redux';
+import Auth from '../utils/auth'
 
 export default function Navigation() {
     const dispatch = useDispatch();
@@ -23,7 +24,7 @@ export default function Navigation() {
                 >
                     <i className="far fa-user-circle fa-3x"></i>
                 </Menu.Item>
-                <Menu.Item as='a' href='/'> 
+                <Menu.Item as='a' href='/dashboard'> 
                     <i className="fas fa-home fa-3x"></i>
                 </Menu.Item>
                 <Menu.Item as='a' href='/workouts'>
@@ -40,7 +41,7 @@ export default function Navigation() {
                 </Menu.Item>
             </Menu.Menu>
             <Menu.Menu position='right'>
-                <Menu.Item as='a'>
+                <Menu.Item as='a' href='/' onClick={() => Auth.logout()}>
                     <i className="fas fa-sign-out-alt fa-3x" />
                 </Menu.Item>
             </Menu.Menu>

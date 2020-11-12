@@ -47,30 +47,28 @@ const client = new ApolloClient({
 export default function App() {
   // Redux Store
   const store = createStore(rootReducer)
-  const loggedIn = Auth.loggedIn();
+  const loggedIn = Auth.getToken();
 
   return (
     <Router>
       <ApolloProvider client={client}>
         <Provider store={store}>
-          {
-            loggedIn
-              ? (
-                <>
-                  <Navigation />
-                  <MenuSidebar />
-                </>
-              )
-              : ''
-          }
           <Grid>
             <Grid.Column width={16}>
               <Switch>
                   <Route exact path="/" component={Home} />                  
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/signup" component={Signup} />
-                  <Route exact path="/workouts" component={Workout} />
-                  <Route exact path="/dashboard" component={Dashboard} />
+                  <Route exact path="/workouts">
+                    <Navigation />
+                    <MenuSidebar />
+                    <Workout />
+                  </Route>
+                  <Route exact path="/dashboard">
+                    <Navigation />
+                    <MenuSidebar />
+                    <Dashboard />
+                  </Route>
                   <Route component={NoMatch} />
               </Switch>
             </Grid.Column>
