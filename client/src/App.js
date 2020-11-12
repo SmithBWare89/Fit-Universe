@@ -11,12 +11,13 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NoMatch from "./pages/NoMatch";
+import Blog from "./pages/Blog"
 
 //Components
 import Header from "../src/components/Header";
 import MenuSidebar from '../src/components/MenuSidebar';
 import Navigation from './components/Navigation';
-import Dashboard from    "./components/Dashboard"
+
 
 import { state } from './utils/GlobalState';
 
@@ -33,6 +34,7 @@ const client = new ApolloClient({
     operation.setContext({
       headers: {
         authorization: token ? `Bearer ${token}` : "",
+        
        
      
       },
@@ -57,7 +59,7 @@ function App() {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/signup" component={Signup} />
-                <Route exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/blog" component={Blog} />
                 <Route component={NoMatch} />
               </Switch>
             </Grid.Column>
