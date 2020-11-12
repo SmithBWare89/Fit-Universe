@@ -6,8 +6,11 @@
 }
 
 #root {
-    background-color: var(--munsell);
     height: 100%;
+}
+
+body {
+  background-color: var(--munsell) !important;
 }
 /* Home */ 
 
@@ -29,6 +32,7 @@ video {
   align-items: center;
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
   object-fit: contain;
+  z-index: 2;
 }
 
 .hero-container > h1 {
