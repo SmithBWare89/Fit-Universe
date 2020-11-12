@@ -52,24 +52,16 @@ export default function App() {
     <Router>
       <ApolloProvider client={client}>
         <Provider store={store}>
+              <MenuSidebar />
+              <Navigation className="navigation"/>
           <Grid>
             <Grid.Column width={16}>
               <Switch>
                   <Route exact path="/" component={Home} />                  
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/signup" component={Signup} />
-                  {
-                    Auth.loggedIn()
-                      ? (
-                        <>
-                        <MenuSidebar />
-                        <Navigation className="navigation"/>
-                        <Route exact path="/workouts" component={Workout} />
-                        <Route exact path="/dashboard" component={Dashboard}></Route>
-                        </>
-                      )
-                      : ''
-                  }
+                  <Route exact path="/workouts" component={Workout} />
+                  <Route exact path="/dashboard" component={Dashboard}></Route>
                   <Route component={NoMatch} />
               </Switch>
             </Grid.Column>
