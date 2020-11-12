@@ -4,20 +4,23 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Mutation: {
-        addStrength: async (parent, args) => {
-            const workout = args.workout;
+        addStrength: async (parent, {id, workout}, context) => {
             const user = await User.findOneAndUpdate(
                 {
-                    _id: args.id
+                    _id: id
                 }
             ),
             {
                 $push: {
                     strengthWorkouts: {
-                        movements: workout
+                        movements: [workout]
                     }
                 }
-            }
+            };
+            
+            return user;
         }
     }
-}
+};
+
+module.exports = resolvers;

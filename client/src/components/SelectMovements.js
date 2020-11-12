@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from 'react-redux';
 export default function SelectMovements() {
     const {
         Group,
-        Field,
     } = Form;
 
     const [open, setOpen] = useState(false);

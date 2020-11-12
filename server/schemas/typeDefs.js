@@ -43,4 +43,6 @@ const typeDefs = gql`
     type Mutation {
         addStrengthWorkout(movements: Array!)
     }
-`
+`;
+
+module.exports = typeDefs;

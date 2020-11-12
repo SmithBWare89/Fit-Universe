@@ -1,4 +1,3 @@
-import { CommentAction } from 'semantic-ui-react';
 import {
     OPEN_MODAL,
     CLOSE_MODAL

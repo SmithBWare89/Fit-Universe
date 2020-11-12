@@ -1,15 +1,12 @@
 import React from 'react';
 import {
-    Container,
     Menu
 } from 'semantic-ui-react';
 import { TOGGLE_SIDEBAR } from '../utils/actions/sidebar';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 export default function Navigation() {
     const dispatch = useDispatch();
-    const state = useSelector(state => state);
-
     function toggleSidebar() {
         dispatch({type: TOGGLE_SIDEBAR});
     }

@@ -12,7 +12,6 @@ import ErrorModal from './ErrorModal';
 
 export default function StrengthLog() {
     const [ workoutState, setWorkOutState ] = useState({});
-    const [ usedReducer, setUsedReducer ] = useState('');
     const dispatch = useDispatch();
     const state = useSelector(state => state.strengthMovementsReducer);
     const movement = Object.entries(state).map(movement => movement);
@@ -38,7 +37,6 @@ export default function StrengthLog() {
                         key={movement[1].name} 
                         workoutState={workoutState} 
                         setWorkOutState={setWorkOutState}
-                        setUsedReducer={setUsedReducer}
                         />
                     }
                     return '';

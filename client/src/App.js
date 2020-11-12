@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route,Switch } from 'react-router-dom';
-import { Grid, Container } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 import { Provider } from 'react-redux';
@@ -14,7 +14,6 @@ import NoMatch from "./pages/NoMatch";
 import Workout from './pages/Workout';
 
 //Components
-import Header from "../src/components/Header";
 import MenuSidebar from '../src/components/MenuSidebar';
 import Navigation from './components/Navigation';
 
@@ -29,12 +28,25 @@ const rootReducer = combineReducers({
   errorModalReducer
 })
 
+const client = new ApolloClient({
+  request: (operation) => {
+    const token = localStorage.getItem('id_token')
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : ''
+      }
+    })
+  },
+  uri: '/graphql',
+})
+
 function App() {
   // Redux Store
   const store = createStore(rootReducer)
 
   return (
-    <Router>
+    <ApolloProvider client={client}>
+      <Router>
         <Provider store={store}>
           <MenuSidebar />
           <Navigation className="navigation"/>
@@ -50,7 +62,8 @@ function App() {
               </Grid.Column>
           </Grid>
         </Provider>
-    </Router>
+      </Router>
+    </ApolloProvider>
   );
 }
 

@@ -12,14 +12,17 @@ import {saveWorkout} from '../utils/helpers/idbPromise';
 import {
     useMutation
 } from '@apollo/react-hooks';
+import {
+    ADD_STRENGTH
+} from '../utils/mutations';
 
-export default function StrengthForm({props, workoutState, setWorkOutState, setUsedReducer}) {
+export default function StrengthForm({props, workoutState, setWorkOutState }) {
     const [ numberSets, setNumberSets ] = useState(0);
     const movementState = useSelector(state => state.strengthMovementsReducer);
     const dispatch = useDispatch();
     const liftVarName = props[0];
     const liftName = props[1].name;
-    const [addStrength, {error}] = useMutation()
+    const [addStrength, {error}] = useMutation(ADD_STRENGTH);
     
     const {
         Group,
@@ -39,7 +42,7 @@ export default function StrengthForm({props, workoutState, setWorkOutState, setU
         setNumberSets(movementState[props[0]].sets)
         saveWorkout(workoutState)
         
-    }, [workoutState, movementState, dispatch]);
+    }, [workoutState, movementState, dispatch, props]);
 
     return (
         <Segment style={{backgroundColor: 'var(--pewter)'}}>
