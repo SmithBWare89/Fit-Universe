@@ -62,6 +62,12 @@ userSchema.virtual('cardioWorkoutCount'). get(function() {
     return this.cardioWorkouts.length;
 });
 
+
+// compare the incoming password with the hashed password
+userSchema.methods.isCorrectPassword = async function(password) {
+  return bcrypt.compare(password, this.password);
+};
+
 // Has User Password Before Saving
 userSchema.pre('save', async function() {
     return this.password = await bcrypt.hash(this.password, 10);
