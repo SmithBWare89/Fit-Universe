@@ -12,12 +12,23 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NoMatch from "./pages/NoMatch";
+<<<<<<< HEAD
+import Blog from "./pages/Blog";
+import SinglePost from "./pages/SinglePost";
+=======
+>>>>>>> 631079c4ccb17b2f62252ae226917dd55178f562
 import Workout from './pages/Workout';
 
 //Components
 import MenuSidebar from '../src/components/MenuSidebar';
 import Navigation from './components/Navigation';
+<<<<<<< HEAD
+
+
+import { state } from './utils/GlobalState';
+=======
 import Dashboard from './components/Dashboard';
+>>>>>>> 631079c4ccb17b2f62252ae226917dd55178f562
 
 // Actions and Reducers
 import sidebarReducer from './utils/reducers/sidebar';
@@ -38,6 +49,9 @@ const client = new ApolloClient({
     operation.setContext({
       headers: {
         authorization: token ? `Bearer ${token}` : "",
+        
+       
+     
       },
     });
   },
@@ -56,6 +70,15 @@ export default function App() {
           <Grid>
             <Grid.Column width={16}>
               <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={Signup} />
+                <Route path="/blogs">
+                  <Navigation />
+                  <Blog />
+                </Route>
+                <Route exact path="/singlepost" component={SinglePost} />
+                <Route component={NoMatch} />
                   <Route exact path="/" component={Home} />                  
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/signup" component={Signup} />
