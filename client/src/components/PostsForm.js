@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { ADD_POST } from "../utils/mutations";
 import { QUERY_POSTS, QUERY_ME } from "../utils/queries";
+import { Grid } from "semantic-ui-react";
 
 const PostForm = () => {
   const [postText, setText] = useState("");
@@ -58,7 +59,7 @@ const PostForm = () => {
 
   return (
     // < className=" twelve wide field centered">
-    <div
+    <Grid
       className="ui column stackable center page grid"
       style={{ backgroundColor: "#BFD7EA" }}
     >
@@ -93,7 +94,7 @@ const PostForm = () => {
           )}
         </p>
       </form>
-    </div>
+    </Grid>
   );
 };
 

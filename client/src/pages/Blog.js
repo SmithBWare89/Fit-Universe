@@ -30,33 +30,40 @@ const Blog= () => {
     <>
       <h2
         className="ui block header centered"
-        style={{ backgroundColor: "#508CA4", color: "#fff" }}
+        style={{ backgroundColor: "#508CA4", color: "#fff", marginTop: -15}}
       >
         Blog
-        <i className="rocketchat icon"> </i>
       </h2>
 
-      <div className=""> 
-       {loggedIn && (
+      <Grid>
+        <Grid.Column
+          width={8}
+          className=""
+          style={{ backgroundColor: "#BFD7EA" }}
+        >
           <div>
-            <PostForm />
-          </div> 
-        )}
-        </div>
+            {loggedIn && (
+              <div>
+                <PostForm />
+              </div>
+            )}
+          </div>
+        </Grid.Column>
 
-      <div>
-        <div>
-          <PostList posts={posts} title="Post something" />
-        </div>
+        <Grid.Column width={8} style={{ backgroundColor: "#BFD7EA" }}>
+          <div>
+            <PostList posts={posts} title="Post" />
+          </div>
 
-        <div className={` ${loggedIn && ""}`}>
+          {/* <div className={` ${loggedIn && ""}`}>
           {loading ? (
             <div>Loading...</div>
           ) : (
             <PostList posts={posts} title="Some Feed for Thought(s)..." />
           )}
-        </div>
-      </div>
+        </div> */}
+        </Grid.Column>
+      </Grid>
     </>
   );
 }

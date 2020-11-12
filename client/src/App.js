@@ -60,7 +60,10 @@ function App() {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/signup" component={Signup} />
-                <Route exact path="/blog" component={Blog} />
+                <Route path="/blogs">
+                  <Navigation />
+                  <Blog />
+                </Route>
                 <Route exact path="/singlepost" component={SinglePost} />
                 <Route component={NoMatch} />
               </Switch>
