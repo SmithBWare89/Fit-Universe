@@ -41,7 +41,7 @@ const client = new ApolloClient({
       },
     });
   },
-  uri: "/graphql",
+  uri: "http://localhost:3000/graphql",
 });
 
 export default function App() {

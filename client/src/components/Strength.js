@@ -17,7 +17,7 @@ import {
 
 
 export default function StrengthLog() {
-    const [ workoutState, setWorkOutState ] = useState([]);
+    const [ workoutState, setWorkOutState ] = useState({});
     const [addStrength, {error}] = useMutation(ADD_STRENGTH);
     const dispatch = useDispatch();
     const state = useSelector(state => state.strengthMovementsReducer);
@@ -30,6 +30,7 @@ export default function StrengthLog() {
         }
         const jsonWorkoutState = JSON.stringify(workoutState);
         addStrength({variables: {movementData: jsonWorkoutState}});
+        window.location.assign('/dashboard')
     }
    
     return (

@@ -14,7 +14,7 @@ import {
 export default function Dashboard() {
     return (
       <>
-      <MenuSidebar/>
+      <h1>Hello! Welcome to the dashboard!</h1>
 
       </>
     );

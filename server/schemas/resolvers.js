@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Post, Strength } = require('../models');
 const { signToken } = require('../utils/auth');
+const bcrypt = require('bcrypt');
 
 const resolvers = {
   Query: {
@@ -37,12 +38,14 @@ const resolvers = {
     login: async (parent, { email, password }) => {
       console.log("trying to login");
       const user = await User.findOne({ email });
+      console.log(user)
 
       if (!user) {
         throw new AuthenticationError("Incorrect credentials");
       }
 
-      const correctPw = await user.isCorrectPassword(password);
+      const correctPw = await bcrypt.compare(password, user.password)
+      console.log(correctPw);
 
       if (!correctPw) {
         throw new AuthenticationError("Incorrect credentials");
@@ -51,25 +54,31 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addStrength: async (parent, args , context) => {
-            if (context.user) {
-                const movementData = args.movementData;
-                const workoutData = await Strength.create({movementData});
-                const userData = await User.findByIdAndUpdate(
-                    context.user._id,
-                    {
-                        $push: {
-                            strengthWorkouts: workoutData.strengthWorkoutId
-                        }
-                    },
-                    {
-                        new: true
-                    }
-                )
-                return userData;
-            }
-            throw new AuthenticationError('Not logged in');
+    addStrength: async (parent, {movementData} , {user}) => {
+          console.log(movementData);
+          console.log(user)
+          const {email} = user;
+          if(user.email) {
+            const strengthWorkout = await Strength.create({movementData});
+            const {strengthWorkoutId} = strengthWorkout;
+            const userData = await User.findOneAndUpdate(
+              {
+                email
+              },
+              {
+                $push: {
+                  strengthWorkout: strengthWorkoutId
+                }
+              },
+              {
+                new: true
+              }
+            );
+
+            console.log(userData)
+            return userData
+          }
     }
-}
+  }
 };
 module.exports = resolvers;

@@ -8,7 +8,6 @@ import {
 } from 'semantic-ui-react';
 import {useDispatch, useSelector} from 'react-redux';
 import {repOptions} from '../utils/helpers/setsAndRepsOptions';
-import {saveWorkout} from '../utils/helpers/idbPromise';
 
 export default function StrengthForm({props, workoutState, setWorkOutState }) {
     const [ numberSets, setNumberSets ] = useState(0);
@@ -80,7 +79,6 @@ export default function StrengthForm({props, workoutState, setWorkOutState }) {
                                             name='delete'
                                             size='small'
                                             aria-label='Delete Button'
-                                            labelPosition='right'
                                         />
                                         Delete Button
                                     </Button>
@@ -152,7 +150,7 @@ export default function StrengthForm({props, workoutState, setWorkOutState }) {
                                         setWorkOutState(
                                             {
                                                 ...workoutState,
-                                                    [weightName]: e.target.value
+                                                [weightName]: e.target.value
                                             }
                                         );
                                     }}
