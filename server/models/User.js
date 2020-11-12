@@ -2,9 +2,8 @@ const mongoose = require('mongoose');
 const { Schema, model, Types } = mongoose;
 const bcrypt = require('bcrypt');
 const Post = require('./Post');
-
+const Strength = require('./StrengthWorkout');
 const profileSchema = require('./schemas/profileSchema');
-const strengthSchema = require('./schemas/strengthWorkout');
 const cardioSchema = require('./schemas/cardioWorkout');
 
 const userSchema = new Schema (
@@ -39,8 +38,12 @@ const userSchema = new Schema (
             }
         ],
         profileInfo: [profileSchema],
-        strengthWorkouts: [strengthSchema],
-        cardioWorkouts: [cardioSchema]
+        strengthWorkouts: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Strength'
+            }
+        ]
     },
     {
         toJSON: {

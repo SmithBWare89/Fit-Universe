@@ -1,5 +1,12 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
+export const ADD_STRENGTH = gql`mutation addStrength($movementData: String!) {
+    addStrength(movementData: $movementData) {
+        movementData
+    	createdAt
+    	strengthWorkoutId
+    }
+}`
 
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {

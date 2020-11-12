@@ -1,8 +1,6 @@
-const { AuthenticationError } = require("apollo-server-express");
-const { signToken } = require("../utils/auth");
-const User = require ("../models/User");
-
-
+const { AuthenticationError } = require('apollo-server-express');
+const { User, Post, Strength } = require('../models');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
@@ -52,6 +50,25 @@ const resolvers = {
 
       const token = signToken(user);
       return { token, user };
+    },
+    addStrength: async (parent, args , context) => {
+            if (context.user) {
+                const movementData = args.movementData;
+                const workoutData = await Strength.create({movementData});
+                const userData = await User.findByIdAndUpdate(
+                    context.user._id,
+                    {
+                        $push: {
+                            strengthWorkouts: workoutData.strengthWorkoutId
+                        }
+                    },
+                    {
+                        new: true
+                    }
+                )
+                return userData;
+            }
+            throw new AuthenticationError('Not logged in');
     }
 }
 };

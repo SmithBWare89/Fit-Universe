@@ -11,9 +11,7 @@ import {
   Segment,
 } from "semantic-ui-react";
 
-
-
-function Dashboard() {
+export default function Dashboard() {
     return (
       <>
       <MenuSidebar/>
@@ -21,5 +19,3 @@ function Dashboard() {
       </>
     );
 }
-
-export default Dashboard;
