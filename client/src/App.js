@@ -5,6 +5,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
+import Auth from '../utils/auth'
 
 // Pages
 import Home from "./pages/Home";
@@ -40,20 +41,6 @@ const client = new ApolloClient({
       },
     });
   },
-  uri: "http://localhost:3000/graphql",
-});
-
-const client = new ApolloClient({
-  request: (operation) => {
-    console.log(operation);
-    const token = localStorage.getItem("id_token");
-
-    operation.setContext({
-      headers: {
-        authorization: token ? `Bearer ${token}` : "",
-      },
-    });
-  },
   uri: "http://localhost:3001/graphql",
 });
 
@@ -71,14 +58,18 @@ export default function App() {
                   <Route exact path="/" component={Home} />                  
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/signup" component={Signup} />
-                  <Route exact path="/workouts" component={Workout>
-                      <MenuSidebar />
-                      <Navigation className="navigation"/>
-                  </Route>
-                  <Route exact path="/dashboard" component={Dashboard}>
-                      <MenuSidebar />
-                      <Navigation className="navigation"/>
-                  </Route>
+                  {
+                    Auth.loggedIn()
+                      ? (
+                        <>
+                        <MenuSidebar />
+                        <Navigation className="navigation"/>
+                        <Route exact path="/workouts" component={Workout} />
+                        <Route exact path="/dashboard" component={Dashboard}></Route>
+                        </>
+                      )
+                      : ''
+                  }
                   <Route component={NoMatch} />
               </Switch>
             </Grid.Column>
