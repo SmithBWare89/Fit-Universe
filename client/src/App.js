@@ -80,7 +80,11 @@ export default function App() {
                     <MenuSidebar />
                     <SinglePost />
                 </Route>
-                <Route component={NoMatch} />
+                <Route component={NoMatch}>
+                  <Navigation />
+                  <MenuSidebar />
+                  <NoMatch />
+                </Route>
               </Switch>
             </Grid.Column>
           </Grid>
