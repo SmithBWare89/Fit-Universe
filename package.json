@@ -2,7 +2,7 @@
   "name": "Fit-Universe",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "dependencies": {
     "if-env": "^1.0.4",
     "path": "^0.12.7",

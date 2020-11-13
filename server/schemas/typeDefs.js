@@ -35,9 +35,6 @@ const typeDefs = gql`
     username: String
     email: String
     posts: [String]
-    friends: [String]
-    strengthWorkouts: [Strength]
-    cardioWorkouts: [CardioWorkout]
   }
 
   type Auth {
