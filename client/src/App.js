@@ -43,7 +43,7 @@ const client = new ApolloClient({
       },
     });
   },
-  uri: "/graphql",
+  uri: process.env.NODE_ENV === 'production' ? '/graphql': 'http://localhost:3000/graphql'
 });
 
 export default function App() {
