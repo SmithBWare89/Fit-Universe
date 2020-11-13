@@ -6,11 +6,7 @@ const typeDefs = gql`
     createdAt: String
     username: String
   }
-  type Query {
-    me: User
-    users: [User]
-    user(username: String!): User
-  }
+
   type Strength {
     strengthWorkoutId: ID
     movementData: String!
@@ -56,13 +52,14 @@ const typeDefs = gql`
     addPost(postText: String!): Post
     addFriend(friendId: ID!): User
   }
- 
-    
-  
 
-  
-
- 
+  type Query {
+    me: User
+    users: [User]
+    user(username: String!): User
+    posts(username: String): User
+    post(id: ID!): User
+  } 
 `;
 
 module.exports = typeDefs;
