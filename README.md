@@ -4,12 +4,10 @@
 
 ## User Story
 ```
-AS a senior engineer working on an e-commerce platform
-I WANT my platform to use Redux to manage global state instead of the Context API
-SO THAT my website's state management is taken out of the React ecosystem
+AS a person or influencer who values fitness, growth, and well-being
+I WANT a platform that allows me to track my fitness, growth, and well-being
+SO THAT I can share this information with like minded individuals across the globe in a social media setting directly within the app
 ```
-
-![Shop Shop](./Shop-Shop.gif)
 
 ## Table of Contents
 * [Installation](#installation)
@@ -20,7 +18,7 @@ SO THAT my website's state management is taken out of the React ecosystem
 * [Questions](#questions)
 
 ## Installation
-You can visit the deployed [web application](https://redux-ecommerce-refactor.herokuapp.com/) which is in it's development phase or by cloning the repository, installing the node packages using the `npm i` in your command line for the `root`, `client`, and `server` folders, and then running `npm run start` while in the `root` directory to start your connection.
+Clone the repository to your local machine and run the script `npm run install` from the root directory in your command line. Once installation has completed, run `npm run start` to start the server. This should automatically open your default browser to view all information.
 
 ## License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -38,5 +36,5 @@ You can visit the deployed [web application](https://redux-ecommerce-refactor.he
 Create a pull request on the repository.
 
 ## Questions
-All questions can be directed to [my email](smithwrestling89@gmail.com) or [github](https://www.github.com/SmithBWare89).
+All questions can be directed to [Stephon Smith](https://www.github.com/SmithBWare89) or [Kristen Mayorga](https://github.com/Mayorgak).
   
