@@ -35,6 +35,7 @@ const rootReducer = combineReducers({
 const client = new ApolloClient({
   request: (operation) => {
     const token = localStorage.getItem("id_token");
+    console.log(operation)
 
     operation.setContext({
       headers: {
@@ -42,7 +43,7 @@ const client = new ApolloClient({
       },
     });
   },
-  uri: "http://localhost:3001/graphql",
+  uri: "http://localhost:3000/graphql",
 });
 
 export default function App() {
