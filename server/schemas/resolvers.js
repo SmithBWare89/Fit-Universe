@@ -3,9 +3,6 @@ const { User, Post, Strength } = require('../models');
 const { signToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');
 
-const { User, Post, Strength } = require('../models');
-const { signToken } = require('../utils/auth');
-
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
