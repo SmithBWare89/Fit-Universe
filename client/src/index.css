@@ -204,3 +204,14 @@ video {
 .comment-modal-card .header, .comment-modal-card .meta, .comment-modal-card .description {
   color: var(--white) !important;
 }
+
+.comment-modal-button:hover {
+  background-color: var(--beau) !important;
+  color: var(--munsell) !important;
+}
+
+.comment-modal-button {
+  background-color: var(--munsell) !important;
+  color: var(--white) !important;
+  font-size: 1.10rem !important;
+}

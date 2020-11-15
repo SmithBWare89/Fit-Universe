@@ -47,6 +47,7 @@ const PostList = ({ posts, title }) => {
                           className="ui bottom attached button comment-button"
                           type="submit"
                           onClick={(e) => {
+                            
                             dispatch({type: OPEN_COMMENT_MODAL, commentModalPostData: post})
                           }}
                         >
