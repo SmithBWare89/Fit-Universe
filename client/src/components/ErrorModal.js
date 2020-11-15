@@ -6,7 +6,7 @@ import {
     Button
 } from 'semantic-ui-react';
 import { useDispatch, useSelector} from 'react-redux';
-import { CLOSE_MODAL } from '../utils/actions/globalStateActions';
+import { CLOSE_ERROR_MODAL } from '../utils/actions/globalStateActions';
 
 export default function ErrorModal(){
     const state = useSelector(state => state.globalStateReducer);
@@ -31,7 +31,7 @@ export default function ErrorModal(){
                     basic
                     color='red'
                     inverted
-                    onClick={() => dispatch({type: CLOSE_MODAL})}
+                    onClick={() => dispatch({type: CLOSE_ERROR_MODAL})}
                 >
                     <Icon name='window close outline' />
                     Done

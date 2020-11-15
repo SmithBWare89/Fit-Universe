@@ -193,3 +193,14 @@ video {
 .comment-button:hover {
   background-color: var(--pewter) !important;
 }
+/*Post List End */
+
+/* Comment Modal */
+.comment-modal-card {
+  background-color: var(--munsell) !important;
+  color: var(--white) !important;
+}
+
+.comment-modal-card .header, .comment-modal-card .meta, .comment-modal-card .description {
+  color: var(--white) !important;
+}

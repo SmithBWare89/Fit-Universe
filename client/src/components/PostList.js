@@ -1,7 +1,13 @@
-import React  from "react";
-import { Card, Button, Transition } from "semantic-ui-react";;
+import React, { useEffect }  from "react";
+import {useDispatch} from 'react-redux';
+import { Card, Button, Transition } from "semantic-ui-react";
+import { OPEN_COMMENT_MODAL } from "../utils/actions/globalStateActions";
+import CommentModal from './CommentModal';
+import {timeConverter} from '../utils/helpers/timeConverter';
 
 const PostList = ({ posts, title }) => {
+  const dispatch = useDispatch(); 
+
   if (!posts) {
     return (
       <h3 className="" style={{}}>
@@ -10,25 +16,11 @@ const PostList = ({ posts, title }) => {
     );
   }
 
-  function timeConverter(UNIX_timestamp){
-    const correctTime = UNIX_timestamp/1000;
-    const a = new Date(correctTime * 1000);
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    const year = a.getFullYear();
-    const month = months[a.getMonth()];
-    const date = a.getDate();
-    const hour = a.getHours() - 12;
-    const AMPM = a.getHours() > 12 ? `PM` : `AM`;
-    const min = a.getMinutes();
-    const time = `${month} ${date} ${year} at ${hour}:${min} ${AMPM}`
-    return time;
-  }
-
   return (
     <Card.Group>
       <Transition.Group
         animation='fade up'
-        duration='500'
+        duration='800'
       >
         {
             posts && posts.map((post) => (
@@ -54,6 +46,9 @@ const PostList = ({ posts, title }) => {
                           style={{ backgroundColor: "var(--munsell)" ,color:"#fff"}}
                           className="ui bottom attached button comment-button"
                           type="submit"
+                          onClick={(e) => {
+                            dispatch({type: OPEN_COMMENT_MODAL, commentModalPostData: post})
+                          }}
                         >
                           Comment
                         </Button>
@@ -63,6 +58,7 @@ const PostList = ({ posts, title }) => {
             ))
         }
       </Transition.Group>
+      <CommentModal title={title}/>
     </Card.Group>
   );
 };

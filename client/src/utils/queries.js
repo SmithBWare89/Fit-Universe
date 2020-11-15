@@ -10,6 +10,7 @@ query posts($username: String) {
         _id
         postText
         createdAt
+        username
       }
     }
 }

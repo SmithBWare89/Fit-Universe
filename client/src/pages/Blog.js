@@ -4,18 +4,12 @@ import PostList from "../components/PostList";
 
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/react-hooks';
-import { useSelector } from 'react-redux';
-import { QUERY_POSTS , QUERY_ME} from "../utils/queries";
+import { useDispatch } from 'react-redux';
+import { QUERY_POSTS } from "../utils/queries";
+import { SET_POST_DATA } from '../utils/actions/globalStateActions';
 
 import {
-  Button,
-  Container,
-  Divider,
   Grid,
-  Header,
-  List,
-  Menu,
-  Segment,
 } from "semantic-ui-react";
 
 
@@ -23,7 +17,7 @@ import {
 const Blog= () => {
   const profile = Auth.getProfile();
   const { loading, data, refetch } = useQuery(QUERY_POSTS, {variables: {username: profile.data.username}});
-  const [posts, setPosts] = useState('');
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     setPosts(data?.posts?.posts);
