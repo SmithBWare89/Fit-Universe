@@ -109,7 +109,7 @@ export default function StrengthForm({props, workoutState, setWorkOutState }) {
                             const weightName = `${liftVarName}-weight-${index}`;
                             return <>
                             <div>
-                                <h2>Set {index}</h2>
+                                <h2>Set {index + 1}</h2>
                             </div>
                             <Group widths='equal' style={{marginBottom: '10px'}}>
                                 <Select 

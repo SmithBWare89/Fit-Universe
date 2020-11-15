@@ -2,12 +2,15 @@ import gql from "graphql-tag";
 
 
 export const QUERY_POSTS = gql`
-  query posts($username: String) {
+query posts($username: String) {
     posts(username: $username) {
-      _id
-      postText
-      createdAt
-      username
+			username
+    	email
+    	posts {
+        _id
+        postText
+        createdAt
+      }
     }
 }
 `;
@@ -16,7 +19,7 @@ export const QUERY_POST = gql`
   query post($id: ID!) {
     post(_id: $id) {
       _id
-      postText
+      posts
       createdAt
       username
     }

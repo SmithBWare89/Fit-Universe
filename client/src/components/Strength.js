@@ -30,7 +30,6 @@ export default function StrengthLog() {
         }
         const jsonWorkoutState = JSON.stringify(workoutState);
         addStrength({variables: {movementData: jsonWorkoutState}});
-        window.location.assign('/dashboard')
     }
    
     return (

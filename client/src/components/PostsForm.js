@@ -5,7 +5,7 @@ import { ADD_POST } from "../utils/mutations";
 import { QUERY_POSTS, QUERY_ME } from "../utils/queries";
 import { Grid } from "semantic-ui-react";
 
-const PostForm = () => {
+const PostForm = ({refetch}) => {
   const [postText, setText] = useState("");
   const [characterCount, setCharacterCount] = useState(0);
 
@@ -52,6 +52,7 @@ const PostForm = () => {
       // clear form value
       setText("");
       setCharacterCount(0);
+      refetch();
     } catch (e) {
       console.error(e);
     }

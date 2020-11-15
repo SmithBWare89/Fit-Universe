@@ -25,25 +25,25 @@ import Dashboard from './components/Dashboard';
 import sidebarReducer from './utils/reducers/sidebar';
 import strengthMovementsReducer from './utils/reducers/strengthMovements';
 import errorModalReducer from './utils/reducers/errorModal';
+import globalStateReducer from './utils/reducers/globalStateReducer';
 
 const rootReducer = combineReducers({
   sidebarReducer,
   strengthMovementsReducer,
-  errorModalReducer
+  errorModalReducer,
+  globalStateReducer
 })
 
 const client = new ApolloClient({
   request: (operation) => {
     const token = localStorage.getItem("id_token");
-    console.log(operation)
-
     operation.setContext({
       headers: {
         authorization: token ? `Bearer ${token}` : "",
       },
     });
   },
-  uri: process.env.NODE_ENV === 'production' ? '/graphql': 'http://localhost:3000/graphql'
+  uri: process.env.NODE_ENV === 'production' ? '/graphql': `http://localhost:3001/graphql`
 });
 
 export default function App() {

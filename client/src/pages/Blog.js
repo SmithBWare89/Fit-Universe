@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PostForm from "../components/PostsForm"
 import PostList from "../components/PostList";
 
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/react-hooks';
+import { useSelector } from 'react-redux';
 import { QUERY_POSTS , QUERY_ME} from "../utils/queries";
 
 import {
@@ -20,9 +21,13 @@ import {
 
 
 const Blog= () => {
-  const { loading, data } = useQuery(QUERY_POSTS);
- 
-  const posts = data?.posts || [];
+  const profile = Auth.getProfile();
+  const { loading, data, refetch } = useQuery(QUERY_POSTS, {variables: {username: profile.data.username}});
+  const [posts, setPosts] = useState('');
+
+  useEffect(() => {
+    setPosts(data?.posts?.posts);
+  }, [useQuery, data])
 
   const loggedIn = Auth.loggedIn();
 
@@ -44,7 +49,7 @@ const Blog= () => {
           <div>
             {loggedIn && (
               <div>
-                <PostForm />
+                <PostForm refetch={refetch}/>
               </div>
             )}
           </div>
@@ -54,14 +59,6 @@ const Blog= () => {
           <div>
             <PostList posts={posts} title="Post" />
           </div>
-
-          {/* <div className={` ${loggedIn && ""}`}>
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <PostList posts={posts} title="Some Feed for Thought(s)..." />
-          )}
-        </div> */}
         </Grid.Column>
       </Grid>
     </>

@@ -1,17 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Container } from "semantic-ui-react";;
+import { Card, Container } from "semantic-ui-react";;
 
 const PostList = ({ posts, title }) => {
-
-  
-  if (!posts.length) {
+  if (!posts) {
     return (
       <h3 className="" style={{}}>
       No Posts Yet...
       </h3>
     );
   }
+  
 
   return (
     <>
@@ -39,9 +38,6 @@ const PostList = ({ posts, title }) => {
             </div>
           ))}
       </div>
-
-
-      
     </>
   );
 };
