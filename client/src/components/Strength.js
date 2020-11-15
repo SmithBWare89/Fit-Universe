@@ -5,7 +5,7 @@ import {
 } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import StrengthForm from './StrengthForm';
-import {OPEN_MODAL} from '../utils/actions/errorModal';
+import {OPEN_MODAL} from '../utils/actions/globalStateActions';
 import ErrorModal from './ErrorModal';
 import {
     useMutation

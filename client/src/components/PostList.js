@@ -51,14 +51,7 @@ const PostList = ({ posts, title }) => {
                     <Card.Content extra>
                       <div className='ui two buttons'>
                         <Button
-                          style={{ backgroundColor: "var(--munsell)",color:"#fff", marginRight: '5px'}}
-                          className="ui bottom attached button encourage-button"
-                          type="submit"
-                        >
-                          Encourage
-                        </Button>
-                        <Button
-                          style={{ backgroundColor: "var(--pewter)" ,color:"#fff"}}
+                          style={{ backgroundColor: "var(--munsell)" ,color:"#fff"}}
                           className="ui bottom attached button comment-button"
                           type="submit"
                         >

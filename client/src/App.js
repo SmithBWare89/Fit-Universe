@@ -24,13 +24,11 @@ import Dashboard from './components/Dashboard';
 // Actions and Reducers
 import sidebarReducer from './utils/reducers/sidebar';
 import strengthMovementsReducer from './utils/reducers/strengthMovements';
-import errorModalReducer from './utils/reducers/errorModal';
 import globalStateReducer from './utils/reducers/globalStateReducer';
 
 const rootReducer = combineReducers({
   sidebarReducer,
   strengthMovementsReducer,
-  errorModalReducer,
   globalStateReducer
 })
 
