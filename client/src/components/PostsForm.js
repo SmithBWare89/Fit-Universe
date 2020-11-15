@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { TextArea, Button, Form } from 'semantic-ui-react';
 import { useMutation } from "@apollo/react-hooks";
 import { ADD_POST } from "../utils/mutations";
 import { QUERY_POSTS, QUERY_ME } from "../utils/queries";
@@ -59,31 +59,33 @@ const PostForm = ({refetch}) => {
   };
 
   return (
-    // < className=" twelve wide field centered">
     <Grid
       className="ui column stackable center page grid"
       style={{ backgroundColor: "#BFD7EA" }}
     >
       <div className="four wide column"></div>
 
-      <form
+      <Form
         style={{ width: 500 }}
         className="ui form center aligned segment"
         onSubmit={handleFormSubmit}
       >
-        <textarea
+        <TextArea
+          as='textarea'
           placeholder="New Post..."
           value={postText}
           className=""
           onChange={handleChange}
-        ></textarea>
-        <button
+          style={{marginBottom: '10px', border: '2px solid var(--munsell)', resize: 'none'}}
+          rows='5'
+        />
+        <Button
           style={{ backgroundColor: "#508CA4" ,color:"#fff"}}
-          className="ui bottom attached button"
+          className="ui bottom attached button encourage-button"
           type="submit"
         >
           Submit
-        </button>
+        </Button>
         <p
           className={`m-0 ${
             characterCount === 280 || error ? "text-error" : ""
@@ -94,7 +96,7 @@ const PostForm = ({refetch}) => {
             <span className="ui error message">Something went wrong...</span>
           )}
         </p>
-      </form>
+      </Form>
     </Grid>
   );
 };

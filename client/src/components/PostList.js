@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Card, Button, Transition, Container } from "semantic-ui-react";;
+import React  from "react";
+import { Card, Button, Transition } from "semantic-ui-react";;
 
 const PostList = ({ posts, title }) => {
   if (!posts) {
@@ -27,45 +26,50 @@ const PostList = ({ posts, title }) => {
 
   return (
     <Card.Group>
-      {
-          posts && posts.map((post) => (
-              <Card
-                to={`/blog/${post.username}`}
-                key={post._id}
-                raised='true'
-              >
-                  <Card.Content>
-                      <Card.Header>
-                          {title}
-                      </Card.Header>
-                      <Card.Meta>
-                          Created {timeConverter(post.createdAt)}
-                      </Card.Meta>
-                      <Card.Description as='p' style={{fontSize: '1.05rem', wordWrap: 'break-word'}}>
-                        {post.postText}
-                      </Card.Description>
-                  </Card.Content>
-                  <Card.Content extra>
-                    <div className='ui two buttons'>
-                      <button
-                        style={{ backgroundColor: "var(--munsell)",color:"#fff", marginRight: '5px'}}
-                        className="ui bottom attached button"
-                        type="submit"
-                      >
-                        Encourage
-                      </button>
-                      <button
-                        style={{ backgroundColor: "var(--pewter)" ,color:"#fff"}}
-                        className="ui bottom attached button"
-                        type="submit"
-                      >
-                        Comment
-                      </button>
-                    </div>
-                  </Card.Content>
-              </Card>
-          ))
-      }
+      <Transition.Group
+        animation='fade up'
+        duration='500'
+      >
+        {
+            posts && posts.map((post) => (
+                <Card
+                  to={`/blog/${post.username}`}
+                  key={post._id}
+                  raised={true}
+                >
+                    <Card.Content>
+                        <Card.Header>
+                            {title}
+                        </Card.Header>
+                        <Card.Meta>
+                            Created {timeConverter(post.createdAt)}
+                        </Card.Meta>
+                        <Card.Description as='p' style={{fontSize: '1.05rem', wordWrap: 'break-word'}}>
+                          {post.postText}
+                        </Card.Description>
+                    </Card.Content>
+                    <Card.Content extra>
+                      <div className='ui two buttons'>
+                        <Button
+                          style={{ backgroundColor: "var(--munsell)",color:"#fff", marginRight: '5px'}}
+                          className="ui bottom attached button encourage-button"
+                          type="submit"
+                        >
+                          Encourage
+                        </Button>
+                        <Button
+                          style={{ backgroundColor: "var(--pewter)" ,color:"#fff"}}
+                          className="ui bottom attached button comment-button"
+                          type="submit"
+                        >
+                          Comment
+                        </Button>
+                      </div>
+                    </Card.Content>
+                </Card>
+            ))
+        }
+      </Transition.Group>
     </Card.Group>
   );
 };

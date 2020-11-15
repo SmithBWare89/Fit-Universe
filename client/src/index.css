@@ -184,3 +184,12 @@ video {
     background-color: red !important;
 }
 /* StrengthForm Style End */
+
+/* Post List */
+.encourage-button:hover {
+  background-color: var(--pewter) !important;
+}
+
+.comment-button:hover {
+  background-color: var(--munsell) !important;
+}
