@@ -19,7 +19,7 @@ export const QUERY_POST = gql`
   query post($id: ID!) {
     post(_id: $id) {
       _id
-      posts
+      postText
       createdAt
       username
     }
