@@ -62,7 +62,7 @@ const PostForm = ({refetch}) => {
   return (
     <Grid
       className="ui column stackable center page grid"
-      style={{ backgroundColor: "#BFD7EA" }}
+      // style={{ backgroundColor: "#BFD7EA" }}
     >
       <div className="four wide column"></div>
 

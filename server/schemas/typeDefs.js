@@ -50,6 +50,7 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     addPost(postText: String!): Post
     addFriend(friendId: ID!): User
+    addComment(postId: ID!, commentBody: String!): Post
   }
 
   type Query {

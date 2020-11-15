@@ -37,22 +37,17 @@ const Blog= () => {
       <Grid>
         <Grid.Column
           width={8}
-          className=""
           style={{ backgroundColor: "#BFD7EA" }}
         >
-          <div>
             {loggedIn && (
-              <div>
                 <PostForm refetch={refetch}/>
-              </div>
             )}
-          </div>
         </Grid.Column>
-
-        <Grid.Column width={8} style={{ backgroundColor: "#BFD7EA" }}>
-          <div>
-            <PostList posts={posts} title="Post" />
-          </div>
+        <Grid.Column 
+          width={8} 
+          style={{ backgroundColor: "#BFD7EA" }}
+        >
+            {loggedIn && (<PostList style={{marginTop:'20px'}}posts={posts} title="Post" />)}
         </Grid.Column>
       </Grid>
     </>

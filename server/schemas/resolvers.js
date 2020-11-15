@@ -66,13 +66,12 @@ const resolvers = {
           }
     },
     addPost: async (parent, args, context) => {
-      console.log(args, context.user);
       if (context.user) {
         const post = await Post.create({
           ...args,
           username: context.user.username,
         });
-        console.log(post)
+
         const userData = await User.findByIdAndUpdate(
           { _id: context.user._id },
           { $push: { posts: post._id } },
@@ -84,6 +83,16 @@ const resolvers = {
         return post;
       }
       throw new AuthenticationError("You need to be logged in!");
+    },
+    addComment: async (parent, {postId, commentBody}, context) => {
+      if(context.user) {
+        const post = await Post.findByIdAndUpdate(
+          { _id: postId},
+          { $push: { comments: { commentBody, username: context.user.username }}},
+          { new: true}
+        ).populate('comments')
+        return post;
+      }
     }
   } 
 };
