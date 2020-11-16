@@ -30,9 +30,10 @@ export default function CommentModal({title}) {
         }
     };
 
-    const handleCommentSubmit = (e) => {
+    const handleCommentSubmit = async (e) => {
         e.preventDefault();
-        addComment({variables: {postId: state.commentModalPostData._id, commentBody: state.commentText}})
+        await addComment({variables: {postId: state.commentModalPostData._id, commentBody: state.commentText}})
+        await dispatch({type: CLOSE_COMMENT_MODAL})
     }
 
     return (
