@@ -8,7 +8,6 @@ const typeDefs = gql`
 
   type Comments {
     _id: ID
-    commendId: ID
     commentBody: String
     username: String
     createdAt: String

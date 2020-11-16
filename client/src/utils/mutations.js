@@ -51,8 +51,8 @@ export const ADD_COMMENT = gql`
       createdAt
       username
       comments {
+        _id
         commentBody
-        commentId
         createdAt
       }
     }
