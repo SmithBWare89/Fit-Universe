@@ -13,7 +13,7 @@ SO THAT I can share this information with like minded individuals across the glo
 https://fit-universe.herokuapp.com/
 
 
-![](https://github.com/SmithBWare89/Fit-Universe)
+![](https://github.com/SmithBWare89/Fit-Universe/blob/readme/client/public/images/Screen%20Shot%202020-11-06%20at%209.36.05%20AM.png)
 
 ## Table of Contents
 * [Installation](#installation)
