@@ -4,9 +4,7 @@ import PostList from "../components/PostList";
 
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/react-hooks';
-import { useDispatch } from 'react-redux';
 import { QUERY_POSTS } from "../utils/queries";
-import { SET_POST_DATA } from '../utils/actions/globalStateActions';
 
 import {
   Grid,

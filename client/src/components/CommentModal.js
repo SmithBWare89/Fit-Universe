@@ -17,7 +17,7 @@ import { CLOSE_COMMENT_MODAL, SET_COMMENT_TEXT } from '../utils/actions/globalSt
 import {timeConverter} from '../utils/helpers/timeConverter';
 
 export default function CommentModal({title}) {
-    const [ addComment, {error} ] = useMutation(ADD_COMMENT);
+    const [ addComment ] = useMutation(ADD_COMMENT);
     const state = useSelector(({globalStateReducer}) => globalStateReducer);
     const [characterCount, setCharacterCount] = useState(0);
     const { commentModalPostData } = state;
