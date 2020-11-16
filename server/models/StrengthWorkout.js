@@ -14,7 +14,12 @@ const strengthSchema = new Schema ({
     createdAt: {
         type: Date,
         default: Date.now
-    }
+    },
+    username: {
+        type: String,
+        required: true
+    },
+    comments: [commentSchema]
 });
 
 const Strength = model('Strength', strengthSchema);

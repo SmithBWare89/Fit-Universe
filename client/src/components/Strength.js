@@ -13,6 +13,7 @@ import {
 import {
     ADD_STRENGTH
 } from '../utils/mutations';
+import Auth from '../utils/auth';
 
 
 
@@ -23,13 +24,17 @@ export default function StrengthLog() {
     const state = useSelector(state => state.strengthMovementsReducer);
     const movement = Object.entries(state).map(movement => movement);
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
+        e.preventDefault();
         const workoutStateLength = Object.keys(workoutState).length;
         if (workoutStateLength === 0) {
-            dispatch({type: OPEN_ERROR_MODAL, errorMessage: 'Please fill out all form elements!'})
+            return await dispatch({type: OPEN_ERROR_MODAL, errorMessage: 'Please fill out all form elements!'})
         }
+        const profile = Auth.getProfile();
         const jsonWorkoutState = JSON.stringify(workoutState);
-        addStrength({variables: {movementData: jsonWorkoutState}});
+        console.log(jsonWorkoutState)
+        await addStrength({variables: {movementData: jsonWorkoutState, username: profile?.data?.username}});
+        window.location.assign('/dashboard');
     }
    
     return (
