@@ -5,7 +5,7 @@ import {
 } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import StrengthForm from './StrengthForm';
-import {OPEN_MODAL} from '../utils/actions/errorModal';
+import {OPEN_ERROR_MODAL} from '../utils/actions/globalStateActions';
 import ErrorModal from './ErrorModal';
 import {
     useMutation
@@ -26,11 +26,10 @@ export default function StrengthLog() {
     function handleSubmit(e) {
         const workoutStateLength = Object.keys(workoutState).length;
         if (workoutStateLength === 0) {
-            dispatch({type: OPEN_MODAL, errorMessage: 'Please fill out all form elements!'})
+            dispatch({type: OPEN_ERROR_MODAL, errorMessage: 'Please fill out all form elements!'})
         }
         const jsonWorkoutState = JSON.stringify(workoutState);
         addStrength({variables: {movementData: jsonWorkoutState}});
-        window.location.assign('/dashboard')
     }
    
     return (

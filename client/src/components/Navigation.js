@@ -2,7 +2,7 @@ import React from 'react';
 import {
     Menu
 } from 'semantic-ui-react';
-import { TOGGLE_SIDEBAR } from '../utils/actions/sidebar';
+import { TOGGLE_SIDEBAR } from '../utils/actions/globalStateActions';
 import { useDispatch } from 'react-redux';
 import Auth from '../utils/auth'
 

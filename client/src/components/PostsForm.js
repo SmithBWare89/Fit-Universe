@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-
+import { TextArea, Button, Form } from 'semantic-ui-react';
 import { useMutation } from "@apollo/react-hooks";
 import { ADD_POST } from "../utils/mutations";
 import { QUERY_POSTS, QUERY_ME } from "../utils/queries";
 import { Grid } from "semantic-ui-react";
 
-const PostForm = () => {
+const PostForm = ({refetch}) => {
   const [postText, setText] = useState("");
   const [characterCount, setCharacterCount] = useState(0);
 
@@ -25,6 +25,7 @@ const PostForm = () => {
 
       // update me object's cache
       const { me } = cache.readQuery({ query: QUERY_ME });
+      console.log(me)
       cache.writeQuery({
         query: QUERY_ME,
         data: { me: { ...me, posts: [...me.posts, addPost] } },
@@ -52,37 +53,40 @@ const PostForm = () => {
       // clear form value
       setText("");
       setCharacterCount(0);
+      refetch();
     } catch (e) {
       console.error(e);
     }
   };
 
   return (
-    // < className=" twelve wide field centered">
     <Grid
       className="ui column stackable center page grid"
-      style={{ backgroundColor: "#BFD7EA" }}
+      // style={{ backgroundColor: "#BFD7EA" }}
     >
       <div className="four wide column"></div>
 
-      <form
+      <Form
         style={{ width: 500 }}
         className="ui form center aligned segment"
         onSubmit={handleFormSubmit}
       >
-        <textarea
+        <TextArea
+          as='textarea'
           placeholder="New Post..."
           value={postText}
           className=""
           onChange={handleChange}
-        ></textarea>
-        <button
+          style={{marginBottom: '10px', border: '2px solid var(--munsell)', resize: 'none'}}
+          rows='5'
+        />
+        <Button
           style={{ backgroundColor: "#508CA4" ,color:"#fff"}}
-          className="ui bottom attached button"
+          className="ui bottom attached button encourage-button"
           type="submit"
         >
           Submit
-        </button>
+        </Button>
         <p
           className={`m-0 ${
             characterCount === 280 || error ? "text-error" : ""
@@ -93,7 +97,7 @@ const PostForm = () => {
             <span className="ui error message">Something went wrong...</span>
           )}
         </p>
-      </form>
+      </Form>
     </Grid>
   );
 };

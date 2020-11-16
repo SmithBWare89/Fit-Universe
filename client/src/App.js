@@ -19,26 +19,20 @@ import Workout from './pages/Workout';
 //Components
 import MenuSidebar from '../src/components/MenuSidebar';
 import Navigation from './components/Navigation';
-
-
-import { state } from './utils/GlobalState';
 import Dashboard from './components/Dashboard';
 
 // Actions and Reducers
-import sidebarReducer from './utils/reducers/sidebar';
 import strengthMovementsReducer from './utils/reducers/strengthMovements';
-import errorModalReducer from './utils/reducers/errorModal';
+import globalStateReducer from './utils/reducers/globalStateReducer';
 
 const rootReducer = combineReducers({
-  sidebarReducer,
   strengthMovementsReducer,
-  errorModalReducer
+  globalStateReducer
 })
 
 const client = new ApolloClient({
   request: (operation) => {
     const token = localStorage.getItem("id_token");
-
     operation.setContext({
       headers: {
         authorization: token ? `Bearer ${token}` : "",
@@ -48,12 +42,12 @@ const client = new ApolloClient({
       },
     });
   },
-  uri: "http://localhost:3000/graphql",
+  uri: process.env.NODE_ENV === 'production' ? '/graphql': `http://localhost:3001/graphql`
 });
 
 export default function App() {
   // Redux Store
-  const store = createStore(rootReducer);
+  const store = createStore(rootReducer)
   const loggedIn = Auth.getToken();
 
   return (
@@ -71,19 +65,19 @@ export default function App() {
                   <Blog />
                 </Route>
                 <Route exact path="/workouts">
-                  <Navigation />
-                  <MenuSidebar />
-                  <Workout />
+                    <Navigation />
+                    <MenuSidebar />
+                    <Workout />
                 </Route>
                 <Route exact path="/dashboard">
-                  <Navigation />
-                  <MenuSidebar />
-                  <Dashboard />
+                    <Navigation />
+                    <MenuSidebar />
+                    <Dashboard />
                 </Route>
                 <Route exact path="/singlepost">
-                  <Navigation />
-                  <MenuSidebar />
-                  <SinglePost />
+                    <Navigation />
+                    <MenuSidebar />
+                    <SinglePost />
                 </Route>
                 <Route component={NoMatch}>
                   <Navigation />

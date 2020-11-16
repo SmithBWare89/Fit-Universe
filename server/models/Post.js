@@ -33,6 +33,7 @@ const commentSchema = new Schema(
     }
 );
 
+
 const postSchema = new Schema(
     {
         postText: {

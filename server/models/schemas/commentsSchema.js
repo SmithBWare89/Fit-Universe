@@ -3,10 +3,6 @@ const { Schema, Types } = mongoose;
 
 const commentSchema = new Schema(
     {
-        commentId: {
-            type: Schema.Types.ObjectId,
-            default: () => new Types.ObjectId()
-        },
         commentBody: {
             type: String,
             required: true,

@@ -1,28 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PostForm from "../components/PostsForm"
 import PostList from "../components/PostList";
 
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/react-hooks';
-import { QUERY_POSTS , QUERY_ME} from "../utils/queries";
+import { QUERY_POSTS } from "../utils/queries";
 
 import {
-  Button,
-  Container,
-  Divider,
   Grid,
-  Header,
-  List,
-  Menu,
-  Segment,
 } from "semantic-ui-react";
 
 
 
 const Blog= () => {
-  const { loading, data } = useQuery(QUERY_POSTS);
- 
-  const posts = data?.posts || [];
+  const profile = Auth.getProfile();
+  const { loading, data, refetch } = useQuery(QUERY_POSTS, {variables: {username: profile.data.username}});
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    setPosts(data?.posts?.posts);
+  }, [useQuery, data])
 
   const loggedIn = Auth.loggedIn();
 
@@ -38,30 +35,17 @@ const Blog= () => {
       <Grid>
         <Grid.Column
           width={8}
-          className=""
           style={{ backgroundColor: "#BFD7EA" }}
         >
-          <div>
             {loggedIn && (
-              <div>
-                <PostForm />
-              </div>
+                <PostForm refetch={refetch}/>
             )}
-          </div>
         </Grid.Column>
-
-        <Grid.Column width={8} style={{ backgroundColor: "#BFD7EA" }}>
-          <div>
-            <PostList posts={posts} title="Post" />
-          </div>
-
-          {/* <div className={` ${loggedIn && ""}`}>
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <PostList posts={posts} title="Some Feed for Thought(s)..." />
-          )}
-        </div> */}
+        <Grid.Column 
+          width={8} 
+          style={{ backgroundColor: "#BFD7EA" }}
+        >
+            {loggedIn && (<PostList style={{marginTop:'20px'}}posts={posts} title="Post" />)}
         </Grid.Column>
       </Grid>
     </>

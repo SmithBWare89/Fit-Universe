@@ -3,8 +3,6 @@ const { User, Post, Strength } = require('../models');
 const { signToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');
 
-
-
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
@@ -12,10 +10,8 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id }).select(
           "-__v -password".populate("posts")
         );
-
         return userData;
       }
-
       throw new AuthenticationError("Not logged in");
     },
     users: async () => {
@@ -27,8 +23,9 @@ const resolvers = {
         .populate("posts");
     },
     posts: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Post.find(params).sort({ createdAt: -1 });
+      const userData = await User.findOne({username}).populate({ path: 'posts'});
+      console.log(userData)
+      return userData;
     },
     post: async (parent, { _id }) => {
       return Post.findOne({ _id });
@@ -60,33 +57,43 @@ const resolvers = {
     },
     addStrength: async (parent, {movementData} , {user}) => {
           const {email} = user;
-          if(user.email) {
+          if(email) {
             const strengthWorkout = await Strength.create({movementData});
             const {strengthWorkoutId} = strengthWorkout;
             const userData = await User.findOneAndUpdate(
-              {email}, {$push: { strengthWorkout: strengthWorkoutId } }, { new: true });
-            return userData
+              {email}, {$push: { strengthWorkouts: strengthWorkoutId } }, { new: true });
+            console.log(userData);
           }
     },
-      addPost: async (parent, args, context) => {
-        if (context.user) {
-          const post = await Post.create({
-            ...args,
-            username: context.user.username,
-          });
+    addPost: async (parent, args, context) => {
+      if (context.user) {
+        const post = await Post.create({
+          ...args,
+          username: context.user.username,
+        });
 
-          await User.findByIdAndUpdate(
-            { _id: context.user._id },
-            { $push: { posts: post._id } },
-            { new: true }
-          );
+        const userData = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { posts: post._id } },
+          { new: true }
+        );
 
-          return post;
-        }
+        console.log(userData);
 
-        throw new AuthenticationError("You need to be logged in!");
-      },
-    } 
-  };
-
+        return post;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    addComment: async (parent, {postId, commentBody}, context) => {
+      if(context.user) {
+        const post = await Post.findByIdAndUpdate(
+          { _id: postId},
+          { $push: { comments: { commentBody, username: context.user.username }}},
+          { new: true}
+        ).populate('comments')
+        return post;
+      }
+    }
+  } 
+};
 module.exports = resolvers;
