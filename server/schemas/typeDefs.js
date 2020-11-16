@@ -1,12 +1,5 @@
 const { gql } = require('apollo-server-express');
 const typeDefs = gql`
-  type Post {
-    _id: ID
-    postText: String
-    createdAt: String
-    username: String
-  }
-
   type Strength {
     strengthWorkoutId: ID
     movementData: String!
@@ -14,6 +7,7 @@ const typeDefs = gql`
   }
 
   type Comments {
+    _id: ID
     commendId: ID
     commentBody: String
     username: String
@@ -37,6 +31,14 @@ const typeDefs = gql`
     friends: [User]
     posts: [Post]
     strengthWorkouts: [Strength]
+  }
+
+  type Post {
+    _id: ID
+    postText: String
+    createdAt: String
+    username: String
+    comments: [Comments]
   }
 
   type Auth {
