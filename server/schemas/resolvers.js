@@ -1,30 +1,55 @@
-const { AuthenticationError } = require("apollo-server-express");
-const { signToken } = require("../utils/auth");
-const User = require ("../models/User");
+const { AuthenticationError } = require('apollo-server-express');
+const { User, Post, Strength } = require('../models');
+const { signToken } = require('../utils/auth');
+const bcrypt = require('bcrypt');
 
 
 
 const resolvers = {
   Query: {
-    // logic here remains the same
+    me: async (parent, args, context) => {
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          "-__v -password".populate("posts")
+        );
+
+        return userData;
+      }
+
+      throw new AuthenticationError("Not logged in");
+    },
+    users: async () => {
+      return User.find().select("-__v -password").populate("posts");
+    },
+    user: async (parent, { username }) => {
+      return User.findOne({ username })
+        .select("-__v -password")
+        .populate("posts");
+    },
+    posts: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Post.find(params).sort({ createdAt: -1 });
+    },
+    post: async (parent, { _id }) => {
+      return Post.findOne({ _id });
+    },
   },
+
   Mutation: {
     addUser: async (parent, args) => {
-      console.log(args);
       const user = await User.create(args);
       const token = signToken(user);
 
       return { token, user };
     },
     login: async (parent, { email, password }) => {
-      console.log("trying to login");
       const user = await User.findOne({ email });
 
       if (!user) {
         throw new AuthenticationError("Incorrect credentials");
       }
 
-      const correctPw = await user.isCorrectPassword(password);
+      const correctPw = await bcrypt.compare(password, user.password)
 
       if (!correctPw) {
         throw new AuthenticationError("Incorrect credentials");
@@ -32,7 +57,36 @@ const resolvers = {
 
       const token = signToken(user);
       return { token, user };
-    }
-}
-};
+    },
+    addStrength: async (parent, {movementData} , {user}) => {
+          const {email} = user;
+          if(user.email) {
+            const strengthWorkout = await Strength.create({movementData});
+            const {strengthWorkoutId} = strengthWorkout;
+            const userData = await User.findOneAndUpdate(
+              {email}, {$push: { strengthWorkout: strengthWorkoutId } }, { new: true });
+            return userData
+          }
+    },
+      addPost: async (parent, args, context) => {
+        if (context.user) {
+          const post = await Post.create({
+            ...args,
+            username: context.user.username,
+          });
+
+          await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $push: { posts: post._id } },
+            { new: true }
+          );
+
+          return post;
+        }
+
+        throw new AuthenticationError("You need to be logged in!");
+      },
+    } 
+  };
+
 module.exports = resolvers;

@@ -8,7 +8,6 @@ import {
   Form,
   Grid,
   Header,
-  Message,
   Segment,
 } from "semantic-ui-react";
 
@@ -40,9 +39,14 @@ function Signup (props) {
     try {
       const { data } = await addUser({
         variables: { ...formState }
+        
       });
+        console.log(data);
+      
+
 
       Auth.login(data.addUser.token);
+      
     } catch (e) {
       console.error(e);
     }
@@ -111,6 +115,7 @@ function Signup (props) {
               </Button>
             </Segment>
           </Form>
+          {error && <div>Sign up failed</div>}
         </Grid.Column>
       </Grid>
     </div>

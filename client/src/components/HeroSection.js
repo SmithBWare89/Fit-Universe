@@ -2,7 +2,7 @@ import React from "react";
  import "../index.css";
  import yoga2 from "./videos/yoga2.mp4";
  import { Button } from "semantic-ui-react";
- import { Redirect } from "react-router-dom";
+
 
 
 function HeroSection() {
