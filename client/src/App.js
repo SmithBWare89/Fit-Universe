@@ -22,12 +22,10 @@ import Navigation from './components/Navigation';
 import Dashboard from './components/Dashboard';
 
 // Actions and Reducers
-import sidebarReducer from './utils/reducers/sidebar';
 import strengthMovementsReducer from './utils/reducers/strengthMovements';
 import globalStateReducer from './utils/reducers/globalStateReducer';
 
 const rootReducer = combineReducers({
-  sidebarReducer,
   strengthMovementsReducer,
   globalStateReducer
 })

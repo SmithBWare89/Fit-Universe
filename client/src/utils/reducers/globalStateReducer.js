@@ -4,13 +4,12 @@ import {
     OPEN_COMMENT_MODAL,
     CLOSE_COMMENT_MODAL,
     SET_COMMENT_TEXT,
-    SET_POST_DATA
+    SET_POST_DATA,
+    TOGGLE_SIDEBAR
 } from '../actions/globalStateActions';
 
 export default function globalStateReducer(state = {
-    sidebarMenu: {
-        visible: false
-    },
+    sidebarVisible: false,
     errorModalOpen: false,
     errorMessage: '',
     commentModalOpen: false,
@@ -46,6 +45,11 @@ export default function globalStateReducer(state = {
             return {
                 ...state,
                 commentText: payload.commentText
+            }
+        case TOGGLE_SIDEBAR:
+            return {
+                ...state,
+                sidebarVisible: !state.sidebarVisible
             }
         default: 
             return state;

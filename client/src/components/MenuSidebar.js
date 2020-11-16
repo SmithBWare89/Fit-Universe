@@ -4,13 +4,12 @@ import {
   Menu,
   Sidebar,
 } from 'semantic-ui-react';
-import { TOGGLE_SIDEBAR } from '../utils/actions/sidebar';
+import { TOGGLE_SIDEBAR } from  '../utils/actions/globalStateActions';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function MenuSidebar() {
     const dispatch = useDispatch();
     const state = useSelector(state => state.globalStateReducer);
-    const { sidebarMenu } = state
     
     return (
         <Grid
@@ -22,7 +21,7 @@ export default function MenuSidebar() {
                     animation='overlay'
                     direction='left'
                     dimmed='true'
-                    visible={sidebarMenu.visible}
+                    visible={state.sidebarVisible}
                     inverted
                     vertical
                     className="menuSidebar"
