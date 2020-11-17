@@ -2,6 +2,9 @@ import React, {useState}from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { ADD_USER } from "../utils/mutations";
 import fit from "../components/videos/fit.mp4";
+import {
+  Embed
+} from 'semantic-ui-react';
 
 import {
   Button,
@@ -54,7 +57,7 @@ function Signup (props) {
   
   return (
     <div className="signup-container">
-      <video src={fit} autoPlay loop muted type="video/mp4" />
+      <video src={fit} autoPlay loop='loop' muted playsinline type="video/mp4" />
       <Grid
         className="signup"
         textAlign="center"
