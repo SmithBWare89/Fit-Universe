@@ -37,13 +37,13 @@ const userSchema = new Schema (
                 ref: 'User'
             }
         ],
-        profileInfo: [profileSchema],
         strengthWorkouts: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Strength'
             }
-        ]
+        ],
+        profileInfo: [profileSchema]
     },
     {
         toJSON: {
