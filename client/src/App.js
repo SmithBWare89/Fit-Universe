@@ -36,9 +36,6 @@ const client = new ApolloClient({
     operation.setContext({
       headers: {
         authorization: token ? `Bearer ${token}` : "",
-        
-       
-     
       },
     });
   },
@@ -48,7 +45,6 @@ const client = new ApolloClient({
 export default function App() {
   // Redux Store
   const store = createStore(rootReducer)
-  const loggedIn = Auth.getToken();
 
   return (
     <Router>
