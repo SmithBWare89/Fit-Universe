@@ -52,7 +52,7 @@ const LoginForm = props => {
   };
     return (
       <div className="login-container">
-        <video src={run} autoPlay loop muted type="video/mp4" />
+        <video src={run} autoPlay loop muted playsinline type="video/mp4" />
         <Grid
           className="login"
           textAlign="center"
