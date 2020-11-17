@@ -5,6 +5,7 @@ import {
   Icon,   
   Segment,   
   Card,
+  Header,
   Button,
   Grid } from "semantic-ui-react";
 import { useQuery } from '@apollo/react-hooks';
@@ -63,6 +64,9 @@ export default function Dashboard() {
     return (
       <Container>
         <Segment raised style={segmentStyle}>
+          <Header as='h1' textAlign='center'>
+            Recent Posts and Workouts
+          </Header>
           <Feed size='large'>
           {
             postFeed.length > 0 && postFeed.map(post => (
