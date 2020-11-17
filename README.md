@@ -8,6 +8,12 @@ AS a person or influencer who values fitness, growth, and well-being
 I WANT a platform that allows me to track my fitness, growth, and well-being
 SO THAT I can share this information with like minded individuals across the globe in a social media setting directly within the app
 ```
+## Link
+
+https://fit-universe.herokuapp.com/
+
+
+![](https://github.com/SmithBWare89/Fit-Universe/blob/readme/client/public/images/Screen%20Shot%202020-11-06%20at%209.36.05%20AM.png)
 
 ## Table of Contents
 * [Installation](#installation)
