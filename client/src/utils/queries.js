@@ -57,6 +57,7 @@ export const QUERY_USERS = gql`
         _id
         postText
         createdAt
+        username
         comments {
           _id
           commentBody
