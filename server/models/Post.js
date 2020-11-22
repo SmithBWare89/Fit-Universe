@@ -1,6 +1,4 @@
 const {Schema, model, Types} = require('mongoose');
-const moment = require('moment');
-
 
 const commentSchema = new Schema(
     {
@@ -11,7 +9,7 @@ const commentSchema = new Schema(
         commentBody: {
             type: String,
             required: true,
-            maxlength: 280,
+            maxlength: 500,
             trim: true
         },
         username: {
@@ -22,8 +20,7 @@ const commentSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now,
-            get: createdAtVal => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
+            default: Date.now
         }
     },
     {
@@ -41,7 +38,7 @@ const postSchema = new Schema(
             required: true,
             trim: true,
             minlength: 1,
-            maxlength: 280
+            maxlength: 500
         },
         createdAt: {
             type: Date,

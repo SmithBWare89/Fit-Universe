@@ -6,7 +6,7 @@ const commentSchema = new Schema(
         commentBody: {
             type: String,
             required: true,
-            maxlength: 280,
+            maxlength: 500,
             trim: true
         },
         username: {
