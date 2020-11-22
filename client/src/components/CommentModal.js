@@ -74,13 +74,13 @@ export default function CommentModal({title}) {
                 onChange={handleChange}
                 style={{marginBottom: '10px', border: '2px solid var(--munsell)', resize: 'none', width: '295px'}}
                 rows='8'
-                maxLength='280'
+                maxLength='500'
             />
                 <p
                     className={`m-0`}
                     style={{marginLeft: '60px', fontSize: '1.25rem'}}
                 >
-                    Character Count: {characterCount}/280
+                    Character Count: {characterCount}/500
                 </p>
         </Modal.Content>
         <Modal.Actions>

@@ -16,6 +16,7 @@ import placeholderUser from '../images/placeholder-user.png';
 import { OPEN_COMMENT_MODAL } from "../utils/actions/globalStateActions";
 import CommentModal from './CommentModal';
 import {useDispatch} from 'react-redux';
+import PostForm from './PostsForm'
 
 
 
@@ -58,63 +59,67 @@ export default function Dashboard() {
           }
         })
       });
-      console.log(postFeed)
     }, [data])
 
     return (
       <Container>
         <Segment raised style={segmentStyle}>
-          <Header as='h1' textAlign='center'>
+          <Header as='h1' textAlign='center' style={{ fontSize: '4.5rem' }}>
+            Add A New Post
+          </Header>
+          <PostForm />
+          <Header as='h1' textAlign='center' style={{ fontSize: '4.5rem' }}>
             Recent Posts and Workouts
           </Header>
-          <Feed size='large'>
-          {
-            postFeed.length > 0 && postFeed.map(post => (
-              <Feed.Event>
-                <Feed.Label style={{width: '4.0em !important'}}>
-                  <img src={placeholderUser} />
-                </Feed.Label>
-                <Feed.Content>
-                  <Feed.Summary style={{fontSize: '1.15rem'}}>
-                    <Feed.User>{post.username}</Feed.User> made a post.
-                    <Feed.Date>{timeConverter(post.createdAt)}</Feed.Date>
-                  </Feed.Summary>
-                  <Card
-                    to={`/blog/${post.username}`}
-                    key={post._id}
-                    raised={true}
-                  >
-                    <Card.Content style={{backgroundColor:'var(--munsell)'}}>
-                      <Card.Description as='p' style={{fontSize: '1.15rem', wordWrap: 'break-word', color: 'var(--white)'}}>
-                          {post.postText}
-                      </Card.Description>
-                    </Card.Content>
-                  </Card>
-                  <Feed.Meta>
-                    <Grid>
-                      <Grid.Row>
-                        <Feed.Like>
-                          <Icon name='heart' size='big'/>
-                        </Feed.Like>
-                        <Button
-                          style={{ backgroundColor: "var(--munsell)" , color:"#fff"}}
-                          className="ui bottom attached button comment-button"
-                          type="submit"
-                          onClick={(e) => {
-                            
-                            dispatch({type: OPEN_COMMENT_MODAL, commentModalPostData: post})
-                          }}
-                        >
-                          Comment
-                        </Button>
-                      </Grid.Row>
-                    </Grid>
-                  </Feed.Meta>
-                </Feed.Content>
-              </Feed.Event>
-            ))
-          }
-          </Feed>
+            <Feed size='large'>
+            {
+              postFeed.length > 0 && postFeed.map(post => (
+                <Feed.Event style={{ padding: '10px', backgroundColor: 'var(--pewter)', marginBottom: '15px', borderRadius: '30px', border: '3px solid var(--munsell)' }}>
+                  <Feed.Label style={{width: '4.0em !important'}}>
+                    <img src={placeholderUser} />
+                  </Feed.Label>
+                  <Feed.Content>
+                    <Feed.Summary style={{fontSize: '1.25rem'}}>
+                      <Feed.User style={{ color: 'var(--white)' }}>{post.username}</Feed.User> made a post.
+                      <Feed.Date style={{fontSize: '1.25rem'}} >{timeConverter(post.createdAt)}</Feed.Date>
+                    </Feed.Summary>
+                    <Card
+                      to={`/blog/${post.username}`}
+                      key={post._id}
+                      raised={true}
+                      style={{width: '25%', wordWrap: 'break-word'}}
+                    >
+                      <Card.Content style={{backgroundColor:'var(--munsell)'}}>
+                        <Card.Description as='p' style={{fontSize: '1.15rem', wordWrap: 'break-word', color: 'var(--white)'}}>
+                            {post.postText}
+                        </Card.Description>
+                      </Card.Content>
+                    </Card>
+                    <Feed.Meta>
+                      <Grid>
+                        <Grid.Row>
+                          <Feed.Like>
+                            <Icon name='heart' size='big'/>
+                          </Feed.Like>
+                          <Button
+                            style={{ backgroundColor: "var(--munsell)" , color:"#fff"}}
+                            className="ui bottom attached button comment-button"
+                            type="submit"
+                            onClick={(e) => {
+                              
+                              dispatch({type: OPEN_COMMENT_MODAL, commentModalPostData: post})
+                            }}
+                          >
+                            Comment
+                          </Button>
+                        </Grid.Row>
+                      </Grid>
+                    </Feed.Meta>
+                  </Feed.Content>
+                </Feed.Event>
+              ))
+            }
+            </Feed>
         </Segment>
         <CommentModal />
       </Container>

@@ -30,9 +30,6 @@ export default function Navigation() {
                 <Menu.Item as='a' href='/workouts'>
                     <i className="fas fa-dumbbell fa-3x"></i>
                 </Menu.Item>
-                <Menu.Item as='a' href='/blogs'>
-                    <i className="fas fa-comment-dots fa-3x"></i>
-                </Menu.Item>
                 <Menu.Item as='a' href='/music'>
                     <i className="fas fa-music fa-3x"></i>
                 </Menu.Item>

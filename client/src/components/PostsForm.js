@@ -3,7 +3,7 @@ import { TextArea, Button, Form } from 'semantic-ui-react';
 import { useMutation } from "@apollo/react-hooks";
 import { ADD_POST } from "../utils/mutations";
 import { QUERY_POSTS, QUERY_ME } from "../utils/queries";
-import { Grid } from "semantic-ui-react";
+import { Icon } from 'semantic-ui-react';
 
 const PostForm = ({refetch}) => {
   const [postText, setText] = useState("");
@@ -35,7 +35,7 @@ const PostForm = ({refetch}) => {
 
   // update state based on form input changes
   const handleChange = (event) => {
-    if (event.target.value.length <= 280) {
+    if (event.target.value.length <= 500) {
       setText(event.target.value);
       setCharacterCount(event.target.value.length);
     }
@@ -60,45 +60,44 @@ const PostForm = ({refetch}) => {
   };
 
   return (
-    <Grid
-      className="ui column stackable center page grid"
-      // style={{ backgroundColor: "#BFD7EA" }}
-    >
-      <div className="four wide column"></div>
-
       <Form
-        style={{ width: 500 }}
+        style={{ width: '100%', borderRadius: '30px', backgroundColor: 'var(--pewter)', border: '3px solid var(--munsell)' }}
         className="ui form center aligned segment"
         onSubmit={handleFormSubmit}
       >
         <TextArea
           as='textarea'
           placeholder="New Post..."
-          value={postText}
+          value={ postText }
           className=""
-          onChange={handleChange}
-          style={{marginBottom: '10px', border: '2px solid var(--munsell)', resize: 'none'}}
+          onChange={ handleChange }
+          style={{ marginBottom: '10px', border: '3px solid var(--munsell)', resize: 'none', borderRadius: '30px' }}
           rows='5'
         />
-        <Button
-          style={{ backgroundColor: "#508CA4" ,color:"#fff"}}
-          className="ui bottom attached button encourage-button"
-          type="submit"
-        >
-          Submit
-        </Button>
+        <Form.Group widths='equal' style={{ marginLeft: '10px' }}>
+          <label for='file-input' style={{ cursor: 'pointer' }}>
+            <Icon name='attach' size='big'/>
+          </label>
+          <input id='file-input' type='file' style={{ display: 'none' }} />
+          <Button
+            style={{ backgroundColor: "#508CA4", color:"#fff"}}
+            className="ui bottom attached button encourage-button"
+            type="submit"
+          >
+            Submit
+          </Button>
+        </Form.Group>
         <p
           className={`m-0 ${
-            characterCount === 280 || error ? "text-error" : ""
+            characterCount === 500 || error ? "text-error" : ""
           }`}
         >
-          Character Count: {characterCount}/280
+          Character Count: {characterCount}/500
           {error && (
             <span className="ui error message">Something went wrong...</span>
           )}
         </p>
       </Form>
-    </Grid>
   );
 };
 
