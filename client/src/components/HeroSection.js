@@ -10,7 +10,7 @@ function HeroSection() {
 
     return (
       <div className="hero-container">
-        <video src={yoga2} autoPlay loop muted playsinline type="video/mp4" />
+        <video src={yoga2} autoPlay loop muted playsInline type="video/mp4" />
         <h1>FIT UNIVERSE</h1>
         <p></p>
         <div className="hero-btns">
